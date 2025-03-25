@@ -23,7 +23,7 @@ Aufgrund der verbleibenden Zeit, Empfehlung der Reviewer mal zuerst eine API Anb
 6. Falls genügend Zeit, API durch Scraping ersetzen
 7. Deployen + Automatisieren
 
--> Beim Einhalten dieser Vorschläge, sollte eine zeitliche Erreichung Fertigstellung möglich sein. 
+-> Beim Einhalten dieser Vorschläge, sollte eine Fertigstellung mit den begrenzten zeitlichen Ressourcen noch möglich sein. 
 
 | Thema                                                                      | Skala | Mängel* | Verbesserungsmöglichkeiten* |
 |----------------------------------------------------------------------------|-------|--------|----------------------------|
