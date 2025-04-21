@@ -93,14 +93,38 @@ docker-compose down
 
 | Gewähltes Beispiel | Bitte ausfüllen |
 | -------- | ------- |
-| onnx-sentiment-analysis | Ja/Nein |
-| onnx-image-classification | Ja/Nein |
-| Repo URL Fork | URL |
-| Docker Hub URL | URL |
+| onnx-sentiment-analysis | Ja |
+| onnx-image-classification | Nein |
+| Repo URL Fork | [URL](https://github.com/yanickfischer/mdm-lernjournal2) |
+| Docker Hub URL | [URL](https://hub.docker.com/repository/docker/yanickpfischer/onnx-sentiment-app/general) |
 
 ### Dokumentation lokales Deployment
 
-* [ ] TODO
+1. Virtuelle Umgebung erstellt
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+2.	Dependencies installiert
+```bash
+ pip install -r requirements.txt
+```
+3.	Erstellung onnx Model (model.onnx)
+```bash
+ python onxx-sentiment-app/export_to_onnx.py
+```
+4.Starten der App
+```bash
+python onxx-sentiment-app/app.py
+```
+5. Dockerisierung
+```bash
+docker build -t yanickpfischer/onnx-sentiment-app:latest .
+```
+6. Upload bei Docker Hub
+```bash
+ddocker push yanickpfischer/onnx-sentiment-app:latest
+```
 
 ### Dokumentation Deployment Azure Web App
 
