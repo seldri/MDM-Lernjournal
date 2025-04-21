@@ -3,6 +3,7 @@
 ## Repository und Library
 
 | Repository (URL) | https://github.com/yanickfischer/SW1_TextManipulation.git |
+|------------------|------------------------------------------------------------|
 | Kurze Beschreibung der App-Funktion | To-Do-Liste mit Text-Manipulation |
 | Verwendete Library aus PyPi (Name) | textblob, nltk, flask, gunicorn |
 | Verwendete Library aus PyPi (URL) | https://pypi.org/project/textblob/, https://pypi.org/project/nltk/, https://pypi.org/project/Flask/, https://pypi.org/project/gunicorn/ |
