@@ -71,6 +71,11 @@ docker-compose.yml
 <img src="images/Vault_Compose_File.png" alt="Compose File" style="max-width: 100%; height: auto;">
 
 Und auch hier kann die Applikation erfolgreich gestartet werden
+
+Das sehen wir sowohl in Docker...
+<img src="images/Vault_Docker.png" alt="Docker Container" style="max-width: 100%; height: auto;">
+
+als auch im localhost...
 <img src="images/Vault_Admin.png" alt="Adminkonsole lokal" style="max-width: 100%; height: auto;">
 
 Hier noch die Ansicht der Diagnostics
