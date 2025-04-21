@@ -84,7 +84,7 @@ az webapp create \
 
 Die App wird jetzt erstellt
 
-<img src="images/Depl5.png" alt="App Build" width="800" height="200">
+<img src="images/Depl5.png" alt="App Build" style="max-width: 100%; height: auto;">
 
 **5. Aufruf der Applikation nach Deployement**
 
