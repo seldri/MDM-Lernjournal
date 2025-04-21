@@ -76,6 +76,12 @@ Und auch hier kann die Applikation erfolgreich gestartet werden
 Hier noch die Ansicht der Diagnostics
 <img src="images/Vault_Diagnostics.png" alt="Admin Diagnostics" style="max-width: 100%; height: auto;">
 
+Zum Schluss fahren wir den Container wieder runter und beenden die Applikation
+```bash
+docker-compose down
+```
+<img src="images/Vault_down.png" alt="Applikation beenden" style="max-width: 100%; height: auto;">
+
 ## Deployment ML-App
 
 ### Variante und Repository
