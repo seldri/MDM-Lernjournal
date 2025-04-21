@@ -42,7 +42,7 @@ gunicorn
 textblob
 nltk
 ```
-
+<img src="images/Req1.png" alt="Requirements" width="500" height="200">
 
 ## Deployment
 
