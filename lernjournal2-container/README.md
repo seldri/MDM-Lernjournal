@@ -14,14 +14,14 @@
 
 ### Dokumentation manuelles Deployment
 
-#### 📦 Ziel
+####  Ziel
 
 Bereitstellung einer webbasierten Passwortmanager-Applikation (Vaultwarden) bestehend aus zwei Docker-Containern:
 
 - **Vaultwarden** (Anwendung)
 - **PostgreSQL** (Datenbank)
 
-#### 🧼 Vorbereitung
+####  Vorbereitung
 
 Alte Container, Volumes und Netzwerk wurden bereinigt:
 
