@@ -42,7 +42,7 @@ gunicorn
 textblob
 nltk
 ```
-<img src="images/Req1.png" alt="Requirements" width="1000" height="500">
+<img src="images/Req1.png" alt="Requirements" width="800" height="200">
 
 ## Deployment
 
@@ -52,14 +52,14 @@ Nachfolgend die vorgenommenen Schritte zum Deployment mit Azure.
 
 **1. Projekt vorbereiten (ZIP-Archiv erstellen)** 
 Zuerst wurde das Projekt als ZIP-Datei verpackt, wobei temporäre Dateien (z.B. .venv) ausgeschlossen wurden: zip -r deployment.zip . -x "*.venv*" "*.git*" "__pycache__/*"
-<img src="images/Deployment1.png" alt="ZIP-File" width="1000" height="500">
+<img src="images/Deployment 1.png" alt="ZIP-File" width="800" height="200">
 
 **2. Azure Ressource anlegen**
 Es wurde eine neue Ressourcengruppe, ein App Service Plan und eine Web-App mit Python Runtime erstellt. Dabei wurde die Version Python 3.13 gewählt und ein frei wählbarer App-Name vergeben:
 ```
 az group create --name mdm-lj1-rg --location westeurope
 ```
-<img src="images/Depl1.png" alt="Resource Group" width="1000" height="500">
+<img src="images/Depl1.png" alt="Resource Group" width="800" height="200">
 
 **3. Azure App Service PLan erstellen**
 ```
@@ -69,7 +69,7 @@ az appservice plan create \
   --sku F1 \
   --is-linux
 ```
-<img src="images/Depl2.png" alt="Service Plan" width="1000" height="500">
+<img src="images/Depl2.png" alt="Service Plan" width="800" height="200">
 
 **4. Web App erstellen (mit Python 3.10)**
 ```
@@ -80,14 +80,14 @@ az webapp create \
   --name mdm-lj1-app \
   --runtime "PYTHON|3.10"
 ```
-<img src="images/Depl4.png" alt="Web App" width="1000" height="500">
+<img src="images/Depl4.png" alt="Web App" width="800" height="200">
 
 Die App wird jetzt erstellt:
-<img src="images/Depl5.png" alt="App Build" width="1000" height="500">
+<img src="images/Depl5.png" alt="App Build" width="800" height="200">
 
 **5. Aufruf der Applikation nach Deployement**
 
 Die Applikation ist bei Azure verfügbar: https://mdm-lj1-app.azurewebsites.net/
 
-<img src="images/Depl6.png" alt="Finale App" width="1000" height="500">
+<img src="images/Depl6.png" alt="Finale App" width="800" height="200">
 
