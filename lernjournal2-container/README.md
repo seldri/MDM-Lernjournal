@@ -11,6 +11,7 @@
 | Docker Compose           | https://github.com/yanickfischer/Lernjournal2-Vaultwarden.git  |
 
 ---
+## Docker Applikation manuell und mit Compose: Vaultwarden-PosgreSQL
 
 ### Dokumentation manuelles Deployment
 
@@ -55,6 +56,25 @@ docker run -d \
 Login mit Secret
 
 <img src="images/Vault2.png" alt="Adminkonsole nach Login" style="max-width: 100%; height: auto;">
+
+### Dokumentation docker-compose.yml orchestrierte Methode
+
+Die Vaultwarden-Applikation wurde nach dem manuellen Deployment nun mit Docker Compose als Mehrcontainer-Anwendung bereitgestellt. Dabei werden zwei Container (Vaultwarden + PostgreSQL) über eine zentrale `docker-compose.yml` orchestriert.
+
+<img src="images/Vault_VsCodeCLI.png" alt="Compose erstellen" style="max-width: 100%; height: auto;">
+
+Im Projektverzeichnis befindet sich die Datei im Odner "Vaultwarden-Compose"
+
+```bash
+docker-compose.yml
+```
+<img src="images/Vault_Compopse_File.png" alt="Compose File" style="max-width: 100%; height: auto;">
+
+Und auch hier kann die Applikation erfolgreich gestartet werden
+<img src="images/Vault_Admin.png" alt="Adminkonsole lokal" style="max-width: 100%; height: auto;">
+
+Hier noch die Ansicht der Diagnostics
+<img src="images/Vault_Diagnostics.png" alt="Admin Diagnostics" style="max-width: 100%; height: auto;">
 
 ## Deployment ML-App
 
