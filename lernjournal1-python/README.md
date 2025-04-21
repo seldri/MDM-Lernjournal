@@ -68,5 +68,14 @@ Entsprechend stehen im Projekt die Dependencies zur Verfügung.
 
 ## Deployment
 
-* [ ] TODO
+Für das Deployment der Webapplikation wurde Microsoft Azure verwendet.
+Das lokal entwickelte Flask-Projekt wird ZIP-Datei auf einen Azure App Service deploye und steht somit der Öffentlichkeit zur Verfügung.
+Nachfolgend die vorgenommenen Schritte zum Deployment mit Azure.
+
+**1. Projekt vorbereiten (ZIP-Archiv erstellen)** 
+Zuerst wurde das Projekt als ZIP-Datei verpackt, wobei temporäre Dateien (z.B. .venv) ausgeschlossen wurden: zip -r deployment.zip . -x "*.venv*" "*.git*" "__pycache__/*"
+
+**2. Azure Ressource anlegen**
+Es wurde eine neue Ressourcengruppe, ein App Service Plan und eine Web-App mit Python Runtime erstellt. Dabei wurde die Version Python 3.13 gewählt und ein frei wählbarer App-Name vergeben:
+
 
