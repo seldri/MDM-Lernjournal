@@ -14,23 +14,47 @@
 
 ### Dokumentation manuelles Deployment
 
-####  Ziel
-
-Bereitstellung einer webbasierten Passwortmanager-Applikation (Vaultwarden) bestehend aus zwei Docker-Containern:
+**Ziel:** Bereitstellung einer webbasierten Passwortmanager-Applikation (Vaultwarden) bestehend aus zwei Docker-Containern:
 
 - **Vaultwarden** (Anwendung)
 - **PostgreSQL** (Datenbank)
 
-####  Vorbereitung
+####  Setup
 
-Alte Container, Volumes und Netzwerk wurden bereinigt:
-
+Netzwerk erstellen
 ```bash
-docker stop vaultwarden vaultwarden-db
-docker rm vaultwarden vaultwarden-db
-docker network rm vaultwarden-net
-docker volume rm vw-data vw-postgres-data
+docker network create vaultwarden-net
 ```
+
+Vaultwarden-Postgress Applikation erstellen und Logindaten für Admiinzugang setzen
+```bash
+docker run -d \
+  --name vaultwarden-db \
+  --network vaultwarden-net \
+  -e POSTGRES_DB=vaultwarden \
+  -e POSTGRES_USER=vwuser \
+  -e POSTGRES_PASSWORD=vwpass \
+  -v vw-postgres-data:/var/lib/postgresql/data \
+  postgres:15
+```
+<img src="images/Vault_ManunalSetup.png" alt="Setup CLI" style="max-width: 100%; height: auto;">
+
+Applikation ausführen
+```bash
+docker run -d \
+  --name vaultwarden \
+  --network vaultwarden-net \
+  -e DATABASE_URL=postgresql://vwuser:vwpass@vaultwarden-db/vaultwarden \
+  -e ADMIN_TOKEN=supersecretadmin123 \
+  -v vw-data:/data \
+  -p 8080:80 \
+  vaultwarden/server:latest
+```
+<img src="images/Vault1.png" alt="Adminkonsole lokal" style="max-width: 100%; height: auto;">
+
+Login mit Secret
+
+<img src="images/Vault2.png" alt="Adminkonsole nach Login" style="max-width: 100%; height: auto;">
 
 ## Deployment ML-App
 
