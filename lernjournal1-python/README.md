@@ -2,12 +2,12 @@
 
 ## Repository und Library
 
-| Repository (URL)  | https://github.com/yanickfischer/SW1_TextManipulation.git
-| Kurze Beschreibung der App-Funktion | To-Do-Liste mit Text-Manipulation |
-| Verwendete Library aus PyPi (Name) | textblob, nltk, flask, gunicorn |
-| Verwendete Library aus PyPi (URL) | [https://pypi.org/project/textblob/](https://pypi.org/project/textblob/, https://pypi.org/project/nltk/, https://pypi.org/project/Flask/, https://pypi.org/project/gunicorn/)|
-| Location deployed Application| https://mdm-lj1-app.azurewebsites.net/|
-| ... | |
+|------------------------------------|--------|
+| **Repository (URL)**               | [https://github.com/yanickfischer/SW1_TextManipulation.git](https://github.com/yanickfischer/SW1_TextManipulation.git) |
+| **Kurze Beschreibung der App-Funktion** | To-Do-Liste mit Text-Manipulation |
+| **Verwendete Library aus PyPi (Name)** | textblob, nltk, flask, gunicorn |
+| **Verwendete Library aus PyPi (URL)** | [textblob](https://pypi.org/project/textblob/), [nltk](https://pypi.org/project/nltk/), [flask](https://pypi.org/project/Flask/), [gunicorn](https://pypi.org/project/gunicorn/) |
+| **Location deployed Application**  | [https://mdm-lj1-app.azurewebsites.net/](https://mdm-lj1-app.azurewebsites.net/) |
 
 ## App, Funktionalität
 Die Webanwendung erlaubt es, einfache Aufgaben (To-Dos) einzugeben, anzuzeigen und zu löschen.  
