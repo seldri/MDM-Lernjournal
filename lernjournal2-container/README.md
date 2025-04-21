@@ -68,7 +68,7 @@ Im Projektverzeichnis befindet sich die Datei im Odner "Vaultwarden-Compose"
 ```bash
 docker-compose.yml
 ```
-<img src="images/Vault_Compopse_File.png" alt="Compose File" style="max-width: 100%; height: auto;">
+<img src="images/Vault_Compose_File.png" alt="Compose File" style="max-width: 100%; height: auto;">
 
 Und auch hier kann die Applikation erfolgreich gestartet werden
 <img src="images/Vault_Admin.png" alt="Adminkonsole lokal" style="max-width: 100%; height: auto;">
