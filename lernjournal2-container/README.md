@@ -37,7 +37,7 @@ docker run -d \
   -v vw-postgres-data:/var/lib/postgresql/data \
   postgres:15
 ```
-<img src="images/Vault_ManunalSetup.png" alt="Setup CLI" style="max-width: 100%; height: auto;">
+<img src="images/Vault_ManualSetup.png" alt="Setup CLI" style="max-width: 100%; height: auto;">
 
 Applikation ausführen
 ```bash
