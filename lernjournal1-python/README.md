@@ -82,12 +82,13 @@ az webapp create \
 ```
 <img src="images/Depl4.png" alt="Web App" width="800" height="200">
 
-Die App wird jetzt erstellt:
+Die App wird jetzt erstellt
+
 <img src="images/Depl5.png" alt="App Build" width="800" height="200">
 
 **5. Aufruf der Applikation nach Deployement**
 
 Die Applikation ist bei Azure verfügbar: https://mdm-lj1-app.azurewebsites.net/
 
-<img src="images/Depl6.png" alt="Finale App" width="800" height="200">
+<img src="images/Depl6.png" alt="Finale App" width="1000" height="600">
 
