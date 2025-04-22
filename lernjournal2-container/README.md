@@ -240,7 +240,12 @@ az container create \
 ```
 <img src="images/az_aci1.png" alt="ACI errors" style="max-width: 100%; height: auto;">
 
-3. Lösung konnte **GEFUNDEN** **NICHT GEFUNDEN** werden **TO TO**
+Weil das Problem auch nach Warten und diversen Versuchen noch bestehen blieb, habe ich ChatGPT konsultiert.
+Mögliche Lösungsversuche könnten sein:
+*Option 1: Später erneut probieren -> **funktioniert leider nicht**
+*Option 2: Workaround über neuen Tag (deutsch = Kennzeichnung) -> **funktioniert leider nicht**
+*Option 3: Azure Container Registry (ACR) verwenden (empfohlen, wenn’s zuverlässig sein soll) ->
+
 
 
 Hier die verfügbaren Subscriptions in meinem privaten Account (privat, weil Studenten-Account schon nicht funktioniert hat)
