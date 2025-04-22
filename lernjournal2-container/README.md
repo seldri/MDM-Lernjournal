@@ -140,12 +140,78 @@ docker push yanickpfischer/onnx-image-classification:latest.
 
 ### Dokumentation Deployment Azure Web App
 
-* [ ] TODO
+Diese Form von Deployment funktioniert bei mir ohne Probleme.
+
+1. Ressourcengruppe erstellen
+```bash
+az group create --name mdm-lj2-rg --location westeurope
+```
+
+2. App Service Plan erstellen
+```bash
+az appservice plan create \
+  --name mdm-lj2-plan \
+  --resource-group mdm-lj2-rg \
+  --sku F1 \
+  --is-linux
+```
+3. Web App mit Docker Image erstellen
+```bash
+az webapp create \
+  --resource-group mdm-lj2-rg \
+  --plan mdm-lj2-plan \
+  --name mdm-lj2-app \
+  --deployment-container-image-name yanickpfischer/onnx-image-classification:latest
+```
+Das Deployment hat funktioniert.
+Es wurden alle Ressourcen erstellt...
+
+Die App Overview sieht gut aus...
+
+Und die App läuft auch wirklich...
 
 ### Dokumentation Deployment ACA
 
-* [ ] TODO
+**Diese Form von Deployment funktioniert nicht aufgrund von Problemen mit den Subscriptions in Azure**
+
+1. Ressourcengruppe erstellen
+```bash
+az group create --location westeurope --name mdm-lj2-aca
+```
+2. Container App Environment erstellen - Schritt funktioniert nicht wegen Subscription issue
+```bash
+az containerapp env create \
+  --name mdm-lj2-onnx-image-classification-env \
+  --resource-group mdm-lj2-aca \
+  --location westeurope
+```
+3. Container App erstellen - funktioniert nicht weil vorheriger Schritt schon fehlschlägt
+```bash
+az containerapp create \
+  --name mdm-lj2-onnx-image-classification-app \
+  --resource-group mdm-lj2-aca \
+  --environment mdm-lj2-onnx-image-classification-env \
+  --image yanickpfischer/onnx-image-classification:latest \
+  --target-port 80 \
+  --ingress external \
+  --query properties.configuration.ingress.fqdn
+```
 
 ### Dokumentation Deployment ACI
 
-* [ ] TODO
+**Diese Form von Deployment funktioniert nicht aufgrund von Problemen mit den Subscriptions in Azure**
+
+1. Ressourcengruppe erstellen
+```bash
+az group create --location westeurope --name mdm-lj2-aci
+```
+
+2. Container Instanz erstellen - Schritt funktioniert nicht wegen Subscription issue
+```bash
+az container create \
+  --resource-group mdm-lj2-aci \
+  --name mdm-lj2-onnx-image-classification-instance \
+  --image yanickpfischer/onnx-image-classification:latest \
+  --dns-name-label mdm-lj2-onnx-image-classification-instance \
+  --ports 80
+```
