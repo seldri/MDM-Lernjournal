@@ -8,7 +8,7 @@
 | Image 1 – URL Docker Hub | https://hub.docker.com/r/vaultwarden/server                    |
 | Image 2                  | postgres:15                                                    |
 | Image 2 – URL Docker Hub | https://hub.docker.com/_/postgres                              |
-| Docker Compose           | https://github.com/yanickfischer/Lernjournal2-Vaultwarden.git  |
+| Docker Compose           | https://github.com/yanickfischer/mdm-lernjournal2-compose |
 
 ---
 ## Docker Applikation manuell und mit Compose: Vaultwarden-PosgreSQL
