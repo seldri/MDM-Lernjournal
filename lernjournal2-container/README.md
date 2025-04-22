@@ -110,15 +110,19 @@ Dabei bin ich wie folgt vorgegangen:
 docker build -t onnx-image-classification .
 docker run --name onnx-image-classification -p 9000:5000 -d onnx-image-classification
 ```
-<img src="images/onnx_localhost.png" alt="Onnx Localhost" style="max-width: 100%; height: auto;">
+<img src="images/onnx_dockerbuild.png" alt="Build Container" style="max-width: 100%; height: auto;">
+
 4. Docker Image wurde erstellt
-```bash
- pip install -r requirements.txt
-```
-5. Test der Docker Applikation im localhost mit einem eigenen Bild eines Roboters
+   
+<img src="images/onnx_docker.png" alt="Docker1" style="max-width: 100%; height: auto;">
+<img src="images/onnx_docker2.png" alt="Docker2" style="max-width: 100%; height: auto;">
+
+6. Test der Docker Applikation im localhost mit einem eigenen Bild eines Roboters
 ```bash
  python onxx-sentiment-app/export_to_onnx.py
 ```
+<img src="images/onnx_localhost.png" alt="Onnx Localhost" style="max-width: 100%; height: auto;">
+
 6. Docker Image taggen
 ```bash
 docker tag onnx-image-classification yanickpfischer/onnx-image-classification:latest
