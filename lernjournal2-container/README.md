@@ -180,7 +180,10 @@ Und die App läuft auch wirklich...
 
 ### Dokumentation Deployment ACA
 
+** Hallo Adrian hiernach der Beschrieb das ACA/ACI bei mir nicht funktioniert. Wir haben das am 22. April gemeinsam im Unterricht besprochen und du meintest zu mir, das wäre in Ordnung, weil wir es besprochen haben und ich das probiert habe. Liebe Grüsse, Yanick**
+
 **Diese Form von Deployment funktioniert nicht aufgrund von Problemen mit den Subscriptions in Azure**
+
 
 Hier die verfügbaren Subscriptions in meinem privaten Account (privat, weil Studenten-Account schon nicht funktioniert hat)
 <img src="images/az_subscriptions.png" alt="Azure Subscriptions Übersicht" style="max-width: 100%; height: auto;">
