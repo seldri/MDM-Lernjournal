@@ -180,14 +180,7 @@ Und die App läuft auch wirklich...
 
 ### Dokumentation Deployment ACA
 
-Nach einigem Krampf und Rumspielen mit Subscriptions und Commands, konnte ich auch mit ACA deployen.
-
-
-Hier die verfügbaren Subscriptions in meinem privaten Account (privat, weil Studenten-Account schon nicht funktioniert hat)
-<img src="images/az_subscriptions.png" alt="Azure Subscriptions Übersicht" style="max-width: 100%; height: auto;">
-
-Hier sieht man, das die Ressourcengruppen von ACA + ACI erstellt werden konnten, aber das anschliessende nicht mehr:
-<img src="images/az_ressource_groups.png" alt="Azure Ressourcengruppen Übersicht" style="max-width: 100%; height: auto;">
+Nach einigem Krampf und Rumspielen mit Subscriptions und Commands, konnte ich auch mit ACA deployen...
 
 1. Ressourcengruppe erstellen
 ```bash
@@ -195,7 +188,7 @@ az group create --location westeurope --name mdm-lj2-aca
 ```
 <img src="images/az_aca0.png" alt="RG created" style="max-width: 100%; height: auto;">
 
-2. Container App Environment erstellen - Schritt funktioniert nicht wegen Subscription issue
+2. Container App Environment erstellen
 ```bash
 az containerapp env create \
   --name mdm2-imgclass-env \
@@ -210,7 +203,7 @@ az provider register -n Microsoft.OperationalInsights --wait
 ```
 <img src="images/az_aca3.png" alt="Env ready" style="max-width: 100%; height: auto;">
 
-4. Container App erstellen - funktioniert nicht weil vorheriger Schritt schon fehlschlägt
+4. Container App erstellen
 ```bash
 az containerapp create \
   --name mdm2-imgclass \
@@ -248,3 +241,10 @@ az container create \
 <img src="images/az_aci1.png" alt="ACI errors" style="max-width: 100%; height: auto;">
 
 3. Lösung konnte **GEFUNDEN** **NICHT GEFUNDEN** werden **TO TO**
+
+
+Hier die verfügbaren Subscriptions in meinem privaten Account (privat, weil Studenten-Account schon nicht funktioniert hat)
+<img src="images/az_subscriptions.png" alt="Azure Subscriptions Übersicht" style="max-width: 100%; height: auto;">
+
+Hier sieht man, das die Ressourcengruppen von ACA + ACI erstellt werden konnten, aber das anschliessende nicht mehr:
+<img src="images/az_ressource_groups.png" alt="Azure Ressourcengruppen Übersicht" style="max-width: 100%; height: auto;">
