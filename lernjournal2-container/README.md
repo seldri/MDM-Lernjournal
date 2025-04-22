@@ -146,6 +146,7 @@ Diese Form von Deployment funktioniert bei mir ohne Probleme.
 ```bash
 az group create --name mdm-lj2-rg --location westeurope
 ```
+<img src="images/az_appservice1.png" alt="App Service – Ressourcengruppe erstellt" style="max-width: 100%; height: auto;">
 
 2. App Service Plan erstellen
 ```bash
@@ -155,6 +156,8 @@ az appservice plan create \
   --sku F1 \
   --is-linux
 ```
+<img src="images/az_appservice2.png" alt="App Service Plan erstellt" style="max-width: 100%; height: auto;">
+
 3. Web App mit Docker Image erstellen
 ```bash
 az webapp create \
@@ -163,21 +166,34 @@ az webapp create \
   --name mdm-lj2-app \
   --deployment-container-image-name yanickpfischer/onnx-image-classification:latest
 ```
+<img src="images/az_appservice3.png" alt="App Deployment läuft" style="max-width: 100%; height: auto;">
+
 Das Deployment hat funktioniert.
+
 Es wurden alle Ressourcen erstellt...
+<img src="images/az_appservice4.png" alt="App im Browser aufrufbar" style="max-width: 100%; height: auto;">
 
 Die App Overview sieht gut aus...
 
 Und die App läuft auch wirklich...
+<img src="images/az_appservice5.png" alt="App Übersicht in Azure Portal" style="max-width: 100%; height: auto;">
 
 ### Dokumentation Deployment ACA
 
 **Diese Form von Deployment funktioniert nicht aufgrund von Problemen mit den Subscriptions in Azure**
 
+Hier die verfügbaren Subscriptions in meinem privaten Account (privat, weil Studenten-Account schon nicht funktioniert hat)
+<img src="images/az_subscriptions.png" alt="Azure Subscriptions Übersicht" style="max-width: 100%; height: auto;">
+
+Hier sieht man, das die Ressourcengruppen von ACA + ACI erstellt werden konnten, aber das anschliessende nicht mehr:
+<img src="images/az_ressource_groups.png" alt="Azure Ressourcengruppen Übersicht" style="max-width: 100%; height: auto;">
+
 1. Ressourcengruppe erstellen
 ```bash
 az group create --location westeurope --name mdm-lj2-aca
 ```
+<img src="images/az_aca1.png" alt="Fehler beim ACA-Environment wegen fehlendem Log Analytics" style="max-width: 100%; height: auto;">
+
 2. Container App Environment erstellen - Schritt funktioniert nicht wegen Subscription issue
 ```bash
 az containerapp env create \
@@ -205,6 +221,7 @@ az containerapp create \
 ```bash
 az group create --location westeurope --name mdm-lj2-aci
 ```
+<img src="images/az_aci.png" alt="Fehler beim ACI-Deployment wegen nicht registrierter Subscription" style="max-width: 100%; height: auto;">
 
 2. Container Instanz erstellen - Schritt funktioniert nicht wegen Subscription issue
 ```bash
