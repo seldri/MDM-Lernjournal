@@ -180,9 +180,7 @@ Und die App läuft auch wirklich...
 
 ### Dokumentation Deployment ACA
 
-** Hallo Adrian hiernach der Beschrieb das ACA/ACI bei mir nicht funktioniert. Wir haben das am 22. April gemeinsam im Unterricht besprochen und du meintest zu mir, das wäre in Ordnung, weil wir es besprochen haben und ich das probiert habe. Liebe Grüsse, Yanick**
-
-**Diese Form von Deployment funktioniert nicht aufgrund von Problemen mit den Subscriptions in Azure**
+Nach einigem Krampf und Rumspielen mit Subscriptions und Commands, konnte ich auch mit ACA deployen.
 
 
 Hier die verfügbaren Subscriptions in meinem privaten Account (privat, weil Studenten-Account schon nicht funktioniert hat)
@@ -195,38 +193,50 @@ Hier sieht man, das die Ressourcengruppen von ACA + ACI erstellt werden konnten,
 ```bash
 az group create --location westeurope --name mdm-lj2-aca
 ```
-<img src="images/az_aca1.png" alt="Fehler beim ACA-Environment wegen fehlendem Log Analytics" style="max-width: 100%; height: auto;">
+<img src="images/az_aca0.png" alt="RG created" style="max-width: 100%; height: auto;">
 
 2. Container App Environment erstellen - Schritt funktioniert nicht wegen Subscription issue
 ```bash
 az containerapp env create \
-  --name mdm-lj2-onnx-image-classification-env \
+  --name mdm2-imgclass-env \
   --resource-group mdm-lj2-aca \
   --location westeurope
 ```
-3. Container App erstellen - funktioniert nicht weil vorheriger Schritt schon fehlschlägt
+<img src="images/az_aca1.png" alt="Fehler beim ACA-Environment wegen fehlendem Log Analytics" style="max-width: 100%; height: auto;">
+
+3. Durch zusätzliche Eingabe dieses Command konnte die Fehlermeldung behoben werden und das Environment wurde erstellt  
+```bash
+az provider register -n Microsoft.OperationalInsights --wait
+```
+<img src="images/az_aca3.png" alt="Env ready" style="max-width: 100%; height: auto;">
+
+4. Container App erstellen - funktioniert nicht weil vorheriger Schritt schon fehlschlägt
 ```bash
 az containerapp create \
-  --name mdm-lj2-onnx-image-classification-app \
+  --name mdm2-imgclass \
   --resource-group mdm-lj2-aca \
-  --environment mdm-lj2-onnx-image-classification-env \
+  --environment mdm2-imgclass-env \
   --image yanickpfischer/onnx-image-classification:latest \
   --target-port 80 \
   --ingress external \
   --query properties.configuration.ingress.fqdn
 ```
+<img src="images/az_aca4.png" alt="Container OK" style="max-width: 100%; height: auto;">
+
+Und das alles funktioniert hat, sehen wir auch hier in der App direkt...
+<img src="images/az_aca5.png" alt="App live" style="max-width: 100%; height: auto;">
 
 ### Dokumentation Deployment ACI
 
 **Diese Form von Deployment funktioniert nicht aufgrund von Problemen mit den Subscriptions in Azure**
 
-1. Ressourcengruppe erstellen
+1. Ressourcengruppe erstellen - funktioniert problemlos wie gewohnt
 ```bash
 az group create --location westeurope --name mdm-lj2-aci
 ```
 <img src="images/az_aci.png" alt="Fehler beim ACI-Deployment wegen nicht registrierter Subscription" style="max-width: 100%; height: auto;">
 
-2. Container Instanz erstellen - Schritt funktioniert nicht wegen Subscription issue
+2. Container Instanz erstellen - funktioniert leider mit mehreren Versuchen nicht mit diesem Command oder Troubleshooting-Vorschlägen von Chat-GPT 4o
 ```bash
 az container create \
   --resource-group mdm-lj2-aci \
@@ -235,3 +245,6 @@ az container create \
   --dns-name-label mdm-lj2-onnx-image-classification-instance \
   --ports 80
 ```
+<img src="images/az_aci1.png" alt="ACI errors" style="max-width: 100%; height: auto;">
+
+3. Lösung konnte **GEFUNDEN** **NICHT GEFUNDEN** werden **TO TO**
