@@ -127,10 +127,16 @@ docker run --name onnx-image-classification -p 9000:5000 -d onnx-image-classific
 ```bash
 docker tag onnx-image-classification yanickpfischer/onnx-image-classification:latest
 ```
+<img src="images/docker_tag.png" alt="Docker tag" style="max-width: 100%; height: auto;">
+
 7. Image auf Docker Hub publishen
 ```bash
 docker push yanickpfischer/onnx-image-classification:latest.
 ```
+<img src="images/docker_Push.png" alt="Docker Hub Push" style="max-width: 100%; height: auto;">
+
+8. Das Image wurde erfolgreich auf Docker Hub published
+<img src="images/docker_hub.png" alt="Publich Hub image" style="max-width: 100%; height: auto;">
 
 ### Dokumentation Deployment Azure Web App
 
