@@ -93,37 +93,39 @@ docker-compose down
 
 | Gewähltes Beispiel | Bitte ausfüllen |
 | -------- | ------- |
-| onnx-sentiment-analysis | Ja |
-| onnx-image-classification | Nein |
-| Repo URL Fork | [URL](https://github.com/yanickfischer/mdm-lernjournal2) |
-| Docker Hub URL | [URL](https://hub.docker.com/repository/docker/yanickpfischer/onnx-sentiment-app/general) |
+| onnx-sentiment-analysis | Nein |
+| onnx-image-classification | Ja |
+| Repo URL Fork | https://github.com/yanickfischer/onnx-image-classification|
+| Docker Hub URL | https://hub.docker.com/repository/docker/yanickpfischer/onnx-image-classification |
 
 ### Dokumentation lokales Deployment
+Nun geht es an den zweiten Teil des Lernjournals.
+Hier soll ich Entweder die onnx-sentiment-analysis oder onnx-image-classification lokal in Docker und auf Azure zum Laufen bringen.
+Dabei bin ich wie folgt vorgegangen:
 
-1. Virtuelle Umgebung erstellt
+1. Fork von https://github.com/mosazhaw/onnx-image-classification erstellt, verfügbar unter https://github.com/yanickfischer/onnx-image-classification
+2. Forked Repository genutzt um einen lokalen Clone im VsCode zu erstellen
+3. Via VsCode CLI den Docker build durchführen
 ```bash
-python -m venv .venv
-source .venv/bin/activate
+docker build -t onnx-image-classification .
+docker run --name onnx-image-classification -p 9000:5000 -d onnx-image-classification
 ```
-2.	Dependencies installiert
+<img src="images/onnx_localhost.png" alt="Onnx Localhost" style="max-width: 100%; height: auto;">
+4. Docker Image wurde erstellt
 ```bash
  pip install -r requirements.txt
 ```
-3.	Erstellung onnx Model (model.onnx)
+5. Test der Docker Applikation im localhost mit einem eigenen Bild eines Roboters
 ```bash
  python onxx-sentiment-app/export_to_onnx.py
 ```
-4.Starten der App
+6. Docker Image taggen
 ```bash
-python onxx-sentiment-app/app.py
+docker tag onnx-image-classification yanickpfischer/onnx-image-classification:latest
 ```
-5. Dockerisierung
+7. Image auf Docker Hub publishen
 ```bash
-docker build -t yanickpfischer/onnx-sentiment-app:latest .
-```
-6. Upload bei Docker Hub
-```bash
-ddocker push yanickpfischer/onnx-sentiment-app:latest
+docker push yanickpfischer/onnx-image-classification:latest.
 ```
 
 ### Dokumentation Deployment Azure Web App
