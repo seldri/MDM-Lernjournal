@@ -140,6 +140,8 @@ docker push yanickpfischer/onnx-image-classification:latest.
 
 ### Dokumentation Deployment Azure Web App
 
+**Azure Application URL = https://mdm-lj2-app.azurewebsites.net/**
+
 Diese Form von Deployment funktioniert bei mir ohne Probleme.
 
 1. Ressourcengruppe erstellen
@@ -179,6 +181,8 @@ Und die App läuft auch wirklich...
 <img src="images/az_appservice5.png" alt="App Übersicht in Azure Portal" style="max-width: 100%; height: auto;">
 
 ### Dokumentation Deployment ACA
+
+**Azure Application URL = https://mdm2-imgclass.proudriver-dbeeb7ad.westeurope.azurecontainerapps.io/**
 
 Nach einigem Krampf und Rumspielen mit Subscriptions und Commands, konnte ich auch mit ACA deployen...
 
@@ -221,7 +225,9 @@ Und das alles funktioniert hat, sehen wir auch hier in der App direkt...
 
 ### Dokumentation Deployment ACI
 
-**Diese Form von Deployment funktioniert nicht aufgrund von Problemen mit den Subscriptions in Azure**
+**Azure Application URL = http://mdm2imgclass.westeurope.azurecontainer.io/** 
+
+Nach einigem Krampf und Rumspielen mit Subscriptions, Commands und Betreuung durch Chat GPT, konnte ich auch mit ACI **aber mit zusätzlicher Verwendung von ACR** deployen...
 
 1. Ressourcengruppe erstellen - funktioniert problemlos wie gewohnt
 ```bash
@@ -230,6 +236,7 @@ az group create --location westeurope --name mdm-lj2-aci
 <img src="images/az_aci.png" alt="Fehler beim ACI-Deployment wegen nicht registrierter Subscription" style="max-width: 100%; height: auto;">
 
 2. Container Instanz erstellen - funktioniert leider mit mehreren Versuchen nicht mit diesem Command oder Troubleshooting-Vorschlägen von Chat-GPT 4o
+**aber ich geb nach Rücksprache mit Adrian Moser doch nicht auf**
 ```bash
 az container create \
   --resource-group mdm-lj2-aci \
@@ -240,16 +247,92 @@ az container create \
 ```
 <img src="images/az_aci1.png" alt="ACI errors" style="max-width: 100%; height: auto;">
 
-Weil das Problem auch nach Warten und diversen Versuchen noch bestehen blieb, habe ich ChatGPT konsultiert.
-Mögliche Lösungsversuche könnten sein:
-*Option 1: Später erneut probieren -> **funktioniert leider nicht**
+Weil das Problem auch nach warten und diversen Versuchen noch bestehen blieb, habe ich ChatGPT konsultiert.
+GPT empfiehlt 3 Optionen, von denen die ersten beiden fehlschlagen...
+
+*Option 1: Später erneut probieren -> **funktioniert leider nicht (wie schon oben im Bild gesehen)**
 *Option 2: Workaround über neuen Tag (deutsch = Kennzeichnung) -> **funktioniert leider nicht**
-*Option 3: Azure Container Registry (ACR) verwenden (empfohlen, wenn’s zuverlässig sein soll) ->
+<img src="images/az_aci_retag.png" alt="Image re-tag" style="max-width: 100%; height: auto;">
 
+*Option 3: Azure Container Registry (ACR) verwenden (empfohlen, wenn’s zuverlässig sein soll) -> somit ist das *hoffentlich* die Lösung...
 
+1. ACR Registry erstellen, um darin dann das Docker-Image abzulegen
+```bash
+az acr create \
+  --resource-group mdm-lj2-aci \
+  --name lj2registry \
+  --sku Basic \
+  --location westeurope
+```
+<img src="images/az_aci_acr1.png" alt="ACR created" style="max-width: 100%; height: auto;">
 
-Hier die verfügbaren Subscriptions in meinem privaten Account (privat, weil Studenten-Account schon nicht funktioniert hat)
-<img src="images/az_subscriptions.png" alt="Azure Subscriptions Übersicht" style="max-width: 100%; height: auto;">
+2. ACR login und Tagen der images
+```bash
+az acr login --name lj2registry
+docker tag yanickpfischer/onnx-image-classification:v2 lj2registry.azurecr.io/onnx-image-classification:v2
+```
+<img src="images/az_aci_acr2.png" alt="ACR login & push" style="max-width: 100%; height: auto;">
 
-Hier sieht man, das die Ressourcengruppen von ACA + ACI erstellt werden konnten, aber das anschliessende nicht mehr:
-<img src="images/az_ressource_groups.png" alt="Azure Ressourcengruppen Übersicht" style="max-width: 100%; height: auto;">
+3. Push des Docker Images (siehe Bild oben)
+```bash
+docker push lj2registry.azurecr.io/onnx-image-classification:v2
+```
+
+3. Versuch Container zu erstellen - schlägt fehl "Please specify --registry-username in order to use custom image registry."
+
+Dieses Bild zeigt Schritt 3, 4 + 5...
+<img src="images/az_aci_acr3.png" alt="ACR enabled admin" style="max-width: 100%; height: auto;">
+
+```bash
+az container create \
+  --resource-group mdm-lj2-aci \
+  --name mdm2imgclass \
+  --image lj2registry.azurecr.io/onnx-image-classification:v2 \
+  --dns-name-label mdm2imgclass \
+  --ports 80 \
+  --os-type Linux \
+  --cpu 1 \
+  --memory 1.5 \
+  --registry-login-server lj2registry.azurecr.io
+```
+4. Versuch Credentials anzuzeigen - schlägt fehl
+```bash
+az acr credential show --name lj2registry
+```
+5. Admin Enablen auf dem Verzeichnis
+```bash
+az acr update -n lj2registry --admin-enabled true
+```
+6. Credentials erneut anzeigen
+```bash
+az acr credential show --name lj2registry
+```
+Hier sind die Passwörter bewusst geschwärzt, ich nutze den value von password für den nächsten Schritt
+<img src="images/az_aci_acr4.png" alt="ACI registry error" style="max-width: 100%; height: auto;">
+
+7. Container erneut erstellen mit geholtem passwort
+```bash
+az container create \
+  --resource-group mdm-lj2-aci \
+  --name mdm2imgclass \
+  --image lj2registry.azurecr.io/onnx-image-classification:v2 \
+  --dns-name-label mdm2imgclass \
+  --ports 80 \
+  --os-type Linux \
+  --cpu 1 \
+  --memory 1.5 \
+  --registry-login-server lj2registry.azurecr.io \
+  --registry-username lj2registry \
+  --registry-password HIER_STEHT_DAS_PASSWORTx
+```
+<img src="images/az_aci_acr5.png" alt="ACI auth added" style="max-width: 100%; height: auto;">
+
+8. Entlich Efolg! Der Container läuft! :D 
+<img src="images/az_aci_acr6.png" alt="ACI running" style="max-width: 100%; height: auto;">
+
+und die Applikation funktioniert auch wirklich...
+<img src="images/az_aci_acr7.png" alt="ACI web UI" style="max-width: 100%; height: auto;">
+
+Hier sehen wir noch die "ACR" Ressourcen die gebraucht werden...
+<img src="images/az_aci_acr8.png" alt="ACI overview portal" style="max-width: 100%; height: auto;">
+
