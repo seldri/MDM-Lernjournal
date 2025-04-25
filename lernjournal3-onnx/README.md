@@ -74,19 +74,19 @@ Ich habe den Modellvergleich durchgeführt und konnte folgende Unterschiede fest
 | Robot     | EfficientNet-Lite4 QDQ | Espresso maker                          | 0.5932     |
 
 Hier die Screenshots zum testbild alligator:
-<img src="images/alligator_standard.png" alt="Bildklassifikation Alligator mit Standard Modell" style="max-width: 60%; height: auto;">
-<img src="images/alligator_int8.png" alt="Bildklassifikation Alligator mit INT8 Modell" style="max-width: 60%; height: auto;">
-<img src="images/alligator_qdq.png" alt="Bildklassifikation Alligator mit QDQ Modell" style="max-width: 60%; height: auto;">
+<img src="images/alligator_standard.png" alt="Bildklassifikation Alligator mit Standard Modell" style="max-width: 30%; height: auto;">
+<img src="images/alligator_int8.png" alt="Bildklassifikation Alligator mit INT8 Modell" style="max-width: 30%; height: auto;">
+<img src="images/alligator_qdq.png" alt="Bildklassifikation Alligator mit QDQ Modell" style="max-width: 30%; height: auto;">
 
 Hier die Screenshots zum testbild dog:
-<img src="images/dog_standard.png" alt="Bildklassifikation Hund mit Standard Modell" style="max-width: 60%; height: auto;">
-<img src="images/dog_int8.png" alt="EfficientNet-Lite4-INT8 - dog" style="max-width: 60%; height: auto;">
-<img src="images/dog_qdq.png" alt="Bildklassifikation Hund mit QDQ Modell" style="max-width: 60%; height: auto;">
+<img src="images/dog_standard.png" alt="Bildklassifikation Hund mit Standard Modell" style="max-width: 30%; height: auto;">
+<img src="images/dog_int8.png" alt="EfficientNet-Lite4-INT8 - dog" style="max-width: 30%; height: auto;">
+<img src="images/dog_qdq.png" alt="Bildklassifikation Hund mit QDQ Modell" style="max-width: 30%; height: auto;">
 
 Hier die Screenshots zum testbild robot:
-<img src="images/robot_standard.png" alt="EfficientNet-Lite4 - robot" style="max-width: 60%; height: auto;">
-<img src="images/robot_int8.png" alt="EfficientNet-Lite4-INT8 - robot" style="max-width: 60%; height: auto;">
-<img src="images/robot_qdq.png" alt="EfficientNet-Lite4-QDQ - robot" style="max-width: 60%; height: auto;">
+<img src="images/robot_standard.png" alt="EfficientNet-Lite4 - robot" style="max-width: 30%; height: auto;">
+<img src="images/robot_int8.png" alt="EfficientNet-Lite4-INT8 - robot" style="max-width: 30%; height: auto;">
+<img src="images/robot_qdq.png" alt="EfficientNet-Lite4-QDQ - robot" style="max-width: 30%; height: auto;">
 
 **Fazit:**
 	•	🐊 Alligator wurde bei allen Modellen mit maximaler Sicherheit korrekt erkannt.
