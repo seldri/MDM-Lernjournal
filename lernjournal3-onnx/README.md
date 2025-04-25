@@ -8,7 +8,6 @@
 | onnx-image-classification Fork (EfficientNet-Lite) | https://github.com/yanickfischer/onnx-image-classification |
 
 ## Dokumentation ONNX Analyse
-## Dokumentation ONNX Analyse
 
 Im Rahmen dieser Aufgabe wurde ein bestehendes EfficientNet-Lite4-Modell im ONNX-Format analysiert. Ziel war es, ein kleineres, quantisiertes Modell (QDQ = Quantize-Dequantize) zu untersuchen, welches für ressourcenschonende Anwendungen optimiert ist. Dazu wurde die ONNX-Datei mit dem Tool [Netron](https://netron.app) geöffnet und drei exemplarische Layers dokumentiert.
 
