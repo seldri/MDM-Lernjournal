@@ -128,12 +128,6 @@ model.load(Paths.get("models"), "birdclassifier");
 
 9. Die Antwort (JSON mit Klassifikation und Wahrscheinlichkeiten) wird vom Frontend entgegengenommen und die Top-Klasse im UI angezeigt.
 
-10. Der komplette Ablauf besteht aus:
-    - Benutzer lädt ein Bild hoch
-    - Das Bild wird an `/predict` gesendet
-    - Das Backend führt Inference aus und sendet das Ergebnis zurück
-    - Das Ergebnis wird im Frontend angezeigt
-
 **Hier sieht man das Ergebnis im Frontent beim lokalen ausführen:**
 <img src="images/App_lokal.png" alt="Lokal laufende WebApp" style="max-width: 100%; height: auto;">
 
@@ -201,17 +195,33 @@ az webapp config appsettings set \
 https://mdm-p2-bird-app.azurewebsites.net
 ```
 
-Die App läuft sauber in Azure, hier ein paar Ansichten aus der App:
+Die App läuft sauber in Azure, hier ein paar Ansichten aus der App, hier die Startseite vor User Interaktion:
 
 <img src="images/AzureApp_1.png" alt="Azure WebApp Übersicht" style="max-width: 100%; height: auto;">
-<img src="images/AzureApp_2.png" alt="Frontend Startseite" style="max-width: 100%; height: auto;">
-<img src="images/AzureApp_3.png" alt="Bildauswahl Upload" style="max-width: 100%; height: auto;">
-<img src="images/AzureApp_4.png" alt="Inference Ergebnisanzeige" style="max-width: 100%; height: auto;">
-<img src="images/AzureApp_5.png" alt="Frontend Klassifikation" style="max-width: 100%; height: auto;">
-<img src="images/AzureApp_6.png" alt="Klassifikation Sooty Albatross" style="max-width: 100%; height: auto;">
-<img src="images/AzureApp_7.png" alt="Frontend mit Infos" style="max-width: 100%; height: auto;">
-<img src="images/AzureApp_8.png" alt="Frontend Ergebnisanzeige" style="max-width: 100%; height: auto;">
+
+Durch anwählen von `Anzeigen` bei Projektinformationen, sieht der User schon die wichtigsten Infos:
+
 <img src="images/AzureApp_Info.png" alt="Projektinformationen Anzeige" style="max-width: 100%; height: auto;">
+
+
+**Der komplette Ablauf besteht aus:**
+
+1.Benutzer lädt ein Bild hoch
+<img src="images/AzureApp_3.png" alt="Bildauswahl Upload" style="max-width: 100%; height: auto;">
+
+2. Das Bild wird an `/predict` gesendet und dem User wird ein Lade-Gif angezeigt bis das Ergebnis verfügbar ist
+<img src="images/AzureApp_4.png" alt="Inference Ergebnisanzeige" style="max-width: 100%; height: auto;">
+
+3. Das Backend führt Inference aus und sendet das Ergebnis zurück
+4. Das Ergebnis wird im Frontend angezeigt
+
+**Beispiel 1: eigentlich die Vogelart Rhinoceros Auklet**
+<img src="images/AzureApp_5.png" alt="Frontend Klassifikation" style="max-width: 100%; height: auto;">
+<img src="images/AzureApp_6.png" alt="Klassifikation Sooty Albatross" style="max-width: 100%; height: auto;"> 
+
+**Beispiel 2: eigentlich die Vogelart "Bobolink"**
+<img src="images/AzureApp_8.png" alt="Frontend Ergebnisanzeige" style="max-width: 100%; height: auto;">
+<img src="images/AzureApp_7.png" alt="Frontend mit Infos" style="max-width: 100%; height: auto;">
 
 
 
