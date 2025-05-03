@@ -21,10 +21,10 @@ Ich kenne nun den Prozess vom Full-Stack-Development mit Python und Java viel be
 Auch das Arbeiten mit ML-Modellen hat mir Spass gemacht und hat sich gut mit dem Modul ML2 ergänzt.
 
 Der Aufwand für die Erarbeitung war allerdings sehr hoch, ich denke am Ende dieses Semester habe ich alleine für dieses Modul cirka 120h Zeit aufgewendet, obwohl 3 ECTS eigentlich 90h Aufwand bedeuten sollte:
--Unterricht = 26h
--Projekt 1 = 50h
--Projekt 2 = 20h
--Lernjournale = 20h 
+* Unterricht = 26h
+* Projekt 1 = 50h
+* Projekt 2 = 20h
+* Lernjournale = 20h 
 
 Evtl. sollte man überlegen, ob dieses Modul nicht ein 6 ECTS Modul werden sollte?
 Denn durch den sehr hohen Aufwand, musste ich bewusst andere Module vernachlässigen, was wohl nicht das Ziel sein sollte? 
