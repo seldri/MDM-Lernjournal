@@ -4,7 +4,7 @@
 
 | | Bitte ausfüllen |
 | -------- | ------- |
-| Variante | Vorhandenes Modell ResNet V1, Netzwerk wurde vollständig selbst trainiert und auf einen eigenen Datensatz trainiert  |
+| Variante | Vorhandenes Modell ResNet V1, Netzwerk vollständig selbst trainiert und auf eigenen Datensatz angewendet |
 | Datensatz (wenn selbstgewählt) | CUB-200 Birds Dataset, Format: Bilder + Text-Dateien                |
 | Datensatz (wenn selbstgewählt) |[https://www.vision.caltech.edu/datasets/cub\_200\_2011/](https://www.vision.caltech.edu/datasets/cub_200_2011/)  | 
 | Modell (wenn selbstgewählt) | lokal trainiertes ResNet50 Modell bezogen von DJL Modell-Builder, https://github.com/deepjavalibrary/djl/blob/master/model-zoo/src/main/java/ai/djl/basicmodelzoo/cv/classification/ResNetV1.java  |
