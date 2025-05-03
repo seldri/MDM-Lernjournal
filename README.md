@@ -1,4 +1,4 @@
-﻿# MDM-Lernjournal <Kürzel ZHAW>
+﻿# MDM-Lernjournal fischya3
 
 ## Inhalt
 
