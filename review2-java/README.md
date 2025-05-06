@@ -16,8 +16,8 @@
 | (Datensatz vorhanden)                                                        | 2 | keine   | etwas wenig Trainingstaten, aber sonst gut  |
 | (Datensatz-Grösse ausreichend, Aufteilung Train/Test, Kennzahlen vorhanden)  | 2  | etwas kleiner Trainingsdatensatz | wenig Daten, nur 10 Bilder für Training, aber der Outcome funktioniert                      |
 | Modell vorhanden                                                           | 2  | keine   | keine, funktioniert überraschend gut |
-| App: auf lokalem Rechner gestartet und funktional                          | 2  | keine  | TODO                       |
-| App: mehrere unterschiedliche Testcases durch Reviewer ausführbar          | 2  | keine   | TODO                       |
+| App: auf lokalem Rechner gestartet und funktional                          | 2  | keine  | keine                       |
+| App: mehrere unterschiedliche Testcases durch Reviewer ausführbar          | 2  | keine   | keine                       |
 | Deployment: Falls bereits vorhanden, funktional und automatisiert          | 0  | noch zu machen   | aktuell läuft es lokal und auf Docker, aber bei azure Deployement gibt es noch ein Problem. evtl. Image nochmal neu builden wegen Mac M-Chip |
 | Code: Git-Repository vorhanden, Arbeiten mit Branches / Commits            | 0  | noch zu machen | Achtung bei Push von grossen Dateien aufpassen, dass GIT-LFS aktiviert ist|
 | Code: Dependency Management, Dockerfile, Build funktional                  | 2  | keine | funktioniert alles bis Coker, Azure noch zu machen|
