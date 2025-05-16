@@ -15,7 +15,11 @@
 
 ### Daten
 
-1. Es wurde das CUB-200 Birds Dataset verwendet
+1. Es wurde das CUB-200 Birds Dataset verwendet, genauer: ein Subset bestehend aus 20 Klassen (statt 200)*
+
+*Diese Entscheidung wurde bewusst getroffen, da in diesem Projekt ein Proof of Concept und ein Prototyp gebaut wurde. 
+Für die effektive Nutzung durch Drittpersonen, kann dieses Repository aber ganz einfach auf die 200 Klassen umgestellt und trainiert werden, Trainings-Compute-Aufwand cirka 30h auf einem lokalen Rechner
+
 2. Die Bilder und Labels wurden für das Training vorbereitet und in einem lokalisierten Ordner gespeichert
 <img src="images/Images_Download.png" alt="Dataset Download-Seite" style="max-width: 100%; height: auto;">
 
