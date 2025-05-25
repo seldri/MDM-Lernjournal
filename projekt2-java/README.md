@@ -14,7 +14,7 @@
 
 ### Daten
 
-1. Verwendet wurde das GTSRB-Dataset, das Verkehrsschilder aus Deutschland beinhaltet.
+1. Es wurde der GTSRB-Datensatz (German Traffic Sign Recognition Benchmark) verwendet – ein etablierter Datensatz zur Erkennung deutscher Verkehrsschilder.
 2. Das Modell wurde via `transformers`-Bibliothek aus Hugging Face geladen.
 3. Die konvertierte Version des Modells befindet sich im Projekt unter:
 
@@ -89,7 +89,7 @@ public ResponseEntity<List<PredictionResult>> predict(@RequestParam("file") Mult
 
 1. Das Projekt kann als Docker Container deployt werden.
 2. Eine mögliche Bereitstellung über Azure Container Apps ist vorbereitet.
-3. Beispielhafte Screenshots des Azure Deployments:
+3. Screenshots des Azure Deployments:
    - Ressourcen-Gruppe:
      <img src="images/AzureResourceGroup.png" alt="Azure Ressourcen-Gruppe" style="max-width: 100%; height: auto;">
    - CLI-Befehl:
