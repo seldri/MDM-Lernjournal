@@ -14,7 +14,7 @@
 Das Projekt befindet sich bereits in der Umsetzung und umfasst eine App zur Analyse und Vorhersage von Wechselkursen des Schweizer Frankens mithilfe von Zeitreihenanalysen mit dem Framework **Prophet** von Facebook.
 
 ## Zusammenfassung Review
-Das Projekt verfolgt ein klar umrissenes Ziel: Wechselkurse des CHF sollen analysiert und prognostiziert werden. Die Daten werden einmalig als **CSV von OpenData.swiss** heruntergeladen, in **MongoDB Cloud** geladen und dann für die Prophet-Zeitreihenanalyse wieder in CSV umgewandelt. 
+Das Projekt verfolgt ein klar umrissenes Ziel: Wechselkurse des CHF sollen analysiert und prognostiziert werden. Die Daten werden einmalig als **CSV von fxtop gescraped** heruntergeladen, in **MongoDB Cloud** geladen und dann für die Prophet-Zeitreihenanalyse wieder in CSV umgewandelt. 
 
 Hier haben wir kritisch hinterfragt, ob der doppelte Umweg über MongoDB und CSV tatsächlich notwendig ist. Die Analyse könnte effizienter gestaltet werden, wenn die Daten direkt in einem geeigneten Format für Prophet verarbeitet würden – z. B. direkt aus MongoDB mit passender Transformation.
 
