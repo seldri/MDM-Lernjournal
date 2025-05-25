@@ -1,78 +1,39 @@
-﻿# MDM-Lernjournal fischya3
+# Screencast Projekt 1
 
-## Inhalt
+Bitte Anzahl Unterkapitel entsprechend der Gruppengrösse anpassen. Der eigene Screencast soll nicht reviewed werden.
 
-* [Lernjournal 1 Python](lernjournal1-python/README.md)
-* [Lernjournal 2 Container](lernjournal2-container/README.md)
-* [Lernjournal 3 ONNX](lernjournal3-onnx/README.md)
-* [Lernjournal 4 UI](lernjournal4-ui/README.md) -> wurde als Aufgabe gestrichen, wegen des hohen Zeitaufwandes im Modul
-* [Projekt 1 Python](projekt1-python/README.md)
-* [Projekt 2 Java](projekt2-java/README.md)
-* [Review 1 Python](review1-python/README.md)
-* [Review 2 Java](review2-java/README.md)
+## Screencast 1
 
-## Schlussteil
+|       | Bitte ausfüllen |
+|-------|-----------------|
+| Review durch (ZHAW-Kürzel) |   selimdri        |
+| Review von (ZHAW-Kürzel) |   selimalb         |
+| Sprache, Kommunikation, roter Faden | Der Sprecher führt klar und zielgerichtet durch die Präsentation. Der Aufbau folgt einer logisch nachvollziehbaren Struktur, wodurch das Publikum stets den Überblick behält. Fachbegriffe werden korrekt eingesetzt und der Sprachfluss ist angenehm. Kleinere Schwächen in der Tonqualität stören den Gesamteindruck kaum, könnten aber bei einer Wiederaufnahme optimiert werden.|
+| Nachvollziehbarkeit Inhalt, Demonstration | Die Trainingsmethodik des KI-Modells sowie die technische Integration in eine produktionsreife Webanwendung sind sauber dokumentiert. Besonders das Java-basierte ONNX-Modell und die MongoDB-Anbindung zeigen den hohen Anspruch des Projekts. Auch die Cloudbereitstellung via Azure wurde klar demonstriert. Eine besonders realistische und praxisnahe Umsetzung – grosses Kompliment. |
 
-### Reflexion, Zusammenfassung
+## Screencast 2
 
-Grundsätzlich war das Modul und die verschiedenen Arbeiten für mich sehr lehrreich.
-Ich habe viele neue Methoden und Techniken kennengelernt, die ich bis dato so noch nicht gekannt habe.
-Ich kenne nun den Prozess vom Full-Stack-Development mit Python und Java viel besser und konnte mich mit Git, Github, Docker und Azure vertieft auseinandersetzen, was ich als sehr wertvoll und lehrreich erachte.
-Auch das Arbeiten mit ML-Modellen hat mir Spass gemacht und hat sich gut mit dem Modul ML2 ergänzt.
+|       | Bitte ausfüllen |
+|-------|-----------------|
+| Review durch (ZHAW-Kürzel) |   selimdri         |
+| Review von (ZHAW-Kürzel) |     bajraedo       |
+| Sprache, Kommunikation, roter Faden | Die Präsentation ist verständlich und gut gegliedert. Die Sprache ist klar und angenehm, und der Aufbau des Videos folgt einem roten Faden. Besonders die klare Einteilung in Themenbereiche wie Modell, Architektur, Tools und Deployment macht es einfach, dem Inhalt zu folgen. Auch das Fazit bringt die wichtigsten Punkte nochmals gut auf den Punkt.|
+| Nachvollziehbarkeit Inhalt, Demonstration | Die gezeigten Inhalte sind logisch nachvollziehbar. Die Funktionalität wird gut erklärt und mit Postman anschaulich demonstriert – man sieht, dass die Verknüpfung sauber funktioniert. Das modern gestaltete Frontend hebt sich positiv vom Beispiel aus der Vorlesung ab. Auch wenn das Projekt auf dem Vorlagenbeispiel basiert, erkennt man den eigenen Aufwand. Ich kann gut nachvollziehen, dass man ohne technischen Background bei so einem Projekt mit Herausforderungen konfrontiert ist – daher grosses Kompliment für die saubere Umsetzung. |
 
-Der Aufwand für die Erarbeitung war allerdings sehr hoch, ich denke am Ende dieses Semester habe ich alleine für dieses Modul cirka 120h Zeit aufgewendet, obwohl 3 ECTS eigentlich 90h Aufwand bedeuten sollte:
-* Unterricht = 26h
-* Projekt 1 = 50h
-* Projekt 2 = 20h
-* Lernjournale = 20h 
+## Screencast 3
 
-Evtl. sollte man überlegen, ob dieses Modul nicht ein 6 ECTS Modul werden sollte?
-Denn durch den sehr hohen Aufwand, musste ich bewusst andere Module vernachlässigen, was wohl nicht das Ziel sein sollte? 
+|       | Bitte ausfüllen |
+|-------|-----------------|
+| Review durch (ZHAW-Kürzel) |     selimdri       |
+| Review von (ZHAW-Kürzel) |    weyerma2        |
+| Sprache, Kommunikation, roter Faden | Die Präsentation war klar verständlich. Die Erklärungen wurden logisch aufgebaut und gut durch das Projekt geführt. Der rote Faden von Problemstellung über Modellnutzung bis zum Ergebnis war gut nachvollziehbar. |
+| Nachvollziehbarkeit Inhalt, Demonstration | Der Inhalt wurde strukturiert präsentiert. Die eingesetzten Technologien und das Vorgehen zur Modellanwendung waren nachvollziehbar, die Resultate wurden verständlich interpretiert. |
 
-### Feedback zur Vorlesung (optional)
+## Screencast 4
 
-Die Materialien sind grundsätzlich recht gut aufbereitet und werden super vermittelt.
-Teilweise fehlt aber Code in den PDF's, welcher zwingend benötigt wird, dieser wurde dann jeweils in Webex geteilt.
-Wären diese Codezeilen direkt in den PDF's integriert, könnte man jederzeit wieder darauf zugreifen und hätte alles an einem Ort.
-Die Beispiele sind ebenfalls spannend und gut gewählt.
-Leider war öfters die Zeit Etwas knapp um spezifische Probleme, welche bei der Arbeit mit so komplexen Projekten zwangsläufig auftreten richtig zu addressieren.
-Die Lernjournal-Aufgaben sind ebenfalls super für den Lerneffekt. Aber teilweise ist hier die Formulierung des Auftrages nicht ganz klar, weshalb es zu Fehlern kommen kann.
-Der Unterschied von "Vorlesungsbeispiel" und eigenes Projekt ist nicht immer intuitiv klar und die Beschrieb helfen teils nur bedingt den Auftag richtig zu verstehen.
-Vieles musste in Kollaboration mit Mitstudierenden erarbeitet werden, was einen zusätzlich Zeit- und Organisationaufwand bedeutet.
-
-Alles in Allem is tdas ein tollles, spannendes und sehr lehrreiches Modul mit tollen Beispielen und guter Vermittlung durch Adrian Moser.
-Der Zeitaufwand für das Modul ist aber extrem gross.
-Man sollte sich wirklich überlegen, ob das Modul nicht ein 6 ECTS Modul sein sollte?
-So bliebe auch genügend Zeit um auf die theoretischen Grundlagen einzugehen oder spezifische technische Problemstellungen genauer anzuschauen.
-
-## Regeln Lernjournal
-
-### Repository
-* Eigenes *privates* Haupt-Repository basierend auf dieser Vorlage erstellen
-* Weitere *private* Repositories je nach Aufgabenstellung erstellen
-* Alle Repositories müssen an [mosazhaw] (https://www.github.com/mosazhaw) freigegeben sein
-
-### Struktur
-* Kapitelstruktur inkl. Nummerierung einhalten (die Reihenfolge, Struktur und Bezeichnung der Titel und Untertitel darf nicht verändert werden)
-* Es dürfen weitere Untertitel (4. Ebene mit ####) ergänzt werden
-
-### Inhalt
-* Deutsch, Markdown
-* Inhaltsverzeichnis und URL zu Repositories und Webseiten müssen klickbar sein (Links)
-* [ ] TODO bezeichnet Stellen, wo Text und/oder Grafiken/Screenshots ergänzt werden sollen
-* Vorgegebene Tabellen zu Beginn der jeweiligen Kapitel müssen belassen werden
-
-### Bilder, Grafiken und Screenshots
-* Es dürfen keine externen Bilder, Grafiken oder Screenshots verknüpft werden
-* Bilder, Grafiken und Screenshots müssen alle im jeweiligen Unterordner "images" abgelegt *und im Bericht sichtbar verknüpft* werden, ein Beispiel:
-
-<img src="images/mdm.png" alt="DevOpsLogo" width="100" height="100">
-
-### Nachvollziehbarkeit Eigenständigkeit
-
-* Verwendung des eigenen Kürzels/Namen/Accounts in Projektnamen, Datei-Pfaden, Repositories, Docker-Images, Docker-Containern und weiteren wählbaren Bezeichnungen
-* Sichtbarkeit des eigenen Kürzels/Name/Accounts auf Screenshots
-* Screenshots passend zu aktuellem Datum, verwendeter Hard-/Software, Versionen
-* Inhalte Projektbericht passend zu Screencast
-
-
+|       | Bitte ausfüllen |
+|-------|-----------------|
+| Review durch (ZHAW-Kürzel) |   selimdri         |
+| Review von (ZHAW-Kürzel) |     singhsuk      |
+| Sprache, Kommunikation, roter Faden | Der Screencast vermittelt die Inhalte deutlich und gut verständlich. Die Präsentation ist sinnvoll gegliedert und wird durch passende Folien unterstützt, die den roten Faden vorgeben. Die Führung durch das Projekt erfolgt in klaren Schritten, wodurch man dem Vortrag mühelos folgen kann. |
+| Nachvollziehbarkeit Inhalt, Demonstration | Zu Beginn wird ein Überblick über das Projekt gegeben, der durch die Folien anschaulich unterstützt wird. Im weiteren Verlauf wird die Applikation im Betrieb gezeigt. Alle Funktionen, Endpunkte und die Einbindung des LLM werden sinnvoll vorgestellt. Die Präsentation ist insgesamt nachvollziehbar. |
