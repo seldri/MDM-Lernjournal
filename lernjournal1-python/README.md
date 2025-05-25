@@ -1,95 +1,91 @@
-﻿# Lernjournal 1 Python
+
+# Lernjournal 1 Python – Textumkehr-App
 
 ## Repository und Library
 
 | Bestandteil | Beschrieb, Fundort |
-|------------------|------------------------------------------------------------|
-| Repository (URL) | https://github.com/yanickfischer/SW1_TextManipulation.git |
-| Kurze Beschreibung der App-Funktion | To-Do-Liste mit Text-Manipulation |
-| Verwendete Library aus PyPi (Name) | textblob, nltk, flask, gunicorn |
-| Verwendete Library aus PyPi (URL) | https://pypi.org/project/textblob/, https://pypi.org/project/nltk/, https://pypi.org/project/Flask/, https://pypi.org/project/gunicorn/ |
-| Location deployed Application | https://mdm-lj1-app.azurewebsites.net/ |
+|-------------|----------------------|
+| Repository (URL) | https://github.com/seldri/reverse-app.git |
+| Kurze Beschreibung der App-Funktion | Die App nimmt einen eingegebenen Text und gibt diesen umgekehrt aus. |
+| Verwendete Library aus PyPi (Name) | Flask |
+| Verwendete Library aus PyPi (URL) | https://pypi.org/project/Flask/ |
+| Location deployed Application | Deployment auf Azure (siehe unten), aktuell fehlgeschlagen (504 Gateway Timeout) |
 
 ## App, Funktionalität
-Die Webanwendung erlaubt es, einfache Aufgaben (To-Dos) einzugeben, anzuzeigen und zu löschen.  
-Zusätzlich wird zu jeder eingegebenen Aufgabe eine Textanalyse durchgeführt:
 
-- Rückwärtsdarstellung des Satzes
-- Wortanzahl
-- Buchstabenanzahl
-- Palindrom-Erkennung
+Die Anwendung besteht aus einer einfachen HTML-Seite, bei der der Benutzer einen Text eingibt. Nach dem Absenden wird der Text umgekehrt dargestellt.
 
-Die Ergebnisse werden unterhalb der Aufgabenliste dargestellt. Die gesamte Logik basiert auf **Flask im Backend** und wird im Frontend mit **HTML, Bootstrap 5 und Vanilla JS** angezeigt.
+Beispiel:
+- Eingabe: `Baum`
+- Ausgabe: `muaB`
 
----
+Die App basiert auf **Flask im Backend**. Die Umkehrung erfolgt über Python-String-Slicing.
 
+![App lokal unter 127.0.0.1](images/pythonrefresh1.png)  
+*Abb. 1: Die lokale Anwendung zeigt korrekt den umgekehrten Text.*
 
-## Dependency Management
+## Projektstruktur
 
-- Virtuelle Umgebung mit `venv` erstellt (`.venv`)
-- Manuelle Pflege der Abhängigkeiten in `requirements.in`
-- Automatische Erstellung der `requirements.txt` mit `pip-compile` (Tool: `pip-tools`)
-- Reproduzierbarkeit gewährleistet durch fixierte Versionen
-- Verwendete Haupt-Libraries:
-  - `flask` – Web-Framework
-  - `textblob` – einfache Textverarbeitung
-  - `nltk` – Natural Language Toolkit
-  - `gunicorn` – WSGI-Server für Deployment
+Das Projekt enthält:
+- `app.py`: Flask-Hauptapplikation
+- `templates/index.html`: HTML-Frontend
+- `requirements.txt`: Abhängigkeiten
+- `reverse-app.zip`: Deployment-Archiv
 
-Beispiel für requirements.in:
-```txt
-flask
-gunicorn
-textblob
-nltk
+![Projektstruktur](images/pythonrefresh2.png)  
+*Abb. 2: Projektstruktur in VSCode.*
+
+## Deployment mit Azure
+
+### 1. Ressourcengruppe erstellen
+
+```bash
+az group create --name reverse-app-rg --location westeurope
 ```
-<img src="images/Req1.png" alt="Requirements" style="max-width: 100%; height: auto;">
 
-## Deployment
+![Ressourcengruppe erstellen](images/pythonrefresh3.png)  
+*Abb. 3: Erstellung der Ressourcengruppe.*
 
-Für das Deployment der Webapplikation wurde Microsoft Azure verwendet.
-Das lokal entwickelte Flask-Projekt wird ZIP-Datei auf einen Azure App Service deploye und steht somit der Öffentlichkeit zur Verfügung.
-Nachfolgend die vorgenommenen Schritte zum Deployment mit Azure.
+### 2. App Service Plan erstellen
 
-**1. Projekt vorbereiten (ZIP-Archiv erstellen)** 
-Zuerst wurde das Projekt als ZIP-Datei verpackt, wobei temporäre Dateien (z.B. .venv) ausgeschlossen wurden: zip -r deployment.zip . -x "*.venv*" "*.git*" "__pycache__/*"
-<img src="images/Deployment 1.png" alt="ZIP-File" style="max-width: 100%; height: auto;">
-
-**2. Azure Ressource anlegen**
-Es wurde eine neue Ressourcengruppe, ein App Service Plan und eine Web-App mit Python Runtime erstellt. Dabei wurde die Version Python 3.13 gewählt und ein frei wählbarer App-Name vergeben:
-```
-az group create --name mdm-lj1-rg --location westeurope
-```
-<img src="images/Depl1.png" alt="Resource Group" style="max-width: 100%; height: auto;">
-
-**3. Azure App Service PLan erstellen**
-```
+```bash
 az appservice plan create \
-  --name mdm-lj1-plan \
-  --resource-group mdm-lj1-rg \
-  --sku F1 \
+  --name reverse-app-plan \
+  --resource-group reverse-app-rg \
+  --sku B1 \
   --is-linux
 ```
-<img src="images/Depl2.png" alt="Service Plan" style="max-width: 100%; height: auto;">
 
-**4. Web App erstellen (mit Python 3.10)**
-```
-# Web App erstellen (mit Python 3.10)
+![App Service Plan erstellen](images/pythonrefresh3.png)  
+*Abb. 4: App Service Plan wurde erfolgreich erstellt.*
+
+### 3. Web App erstellen
+
+```bash
 az webapp create \
-  --resource-group mdm-lj1-rg \
-  --plan mdm-lj1-plan \
-  --name mdm-lj1-app \
-  --runtime "PYTHON|3.10"
+  --resource-group reverse-app-rg \
+  --plan reverse-app-plan \
+  --name dein-appname-123 \
+  --runtime "PYTHON|3.11" \
+  --deployment-local-git
 ```
-<img src="images/Depl4.png" alt="Web App" style="max-width: 100%; height: auto;">
 
-Die App wird jetzt erstellt
+![Web App erstellen](images/pythonrefresh4.png)  
+*Abb. 5: Die Web-App wurde erstellt und lokales Git-Deployment eingerichtet.*
 
-<img src="images/Depl5.png" alt="App Build" style="max-width: 100%; height: auto;">
+### 4. Deployment via ZIP-Datei (fehlgeschlagen)
 
-**5. Aufruf der Applikation nach Deployement**
+```bash
+az webapp deployment source config-zip \
+  --resource-group reverse-app-rg \
+  --name dein-appname-123 \
+  --src reverse-app.zip
+```
 
-Die Applikation ist bei Azure verfügbar: https://mdm-lj1-app.azurewebsites.net/
+![Deployment fehlgeschlagen](images/pythonrefresh5.png)  
+*Abb. 6: Deployment schlägt fehl mit einem 504 Gateway Timeout.*
 
-<img src="images/Depl6.png" alt="Finale App" style="max-width: 100%; height: auto;">
+## Fazit
 
+Die App funktioniert lokal zuverlässig und erfüllt die vorgesehene Funktion der Textrückwärtstransformation.  
+Das Deployment auf Azure war im ersten Versuch nicht erfolgreich. Es wird empfohlen, den Vorgang mit einem alternativen Befehl (`az webapp deploy`) oder über ein verbundenes Git-Repository erneut durchzuführen.
