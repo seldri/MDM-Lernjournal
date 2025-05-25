@@ -4,95 +4,76 @@
 
 | | Beschreibung |
 | -------- | ------- |
-| ONNX Modell für Analyse (Netron) | [mobilenetv3-small.onnx Analyse](https://netron.app/) |
-| Modellklassifikation mit Skript | [Projekt auf GitHub](https://github.com/seldri/models) |
+| ONNX Modell für Analyse (Netron) | [efficientnet-lite4-11.onnx Analyse](https://netron.app/) |
+| Ersetztes Modell | efficientnet-lite0 |
+| Modellklassifikation mit App | [Projekt auf GitHub](https://github.com/seldri/models) |
 
 ## Dokumentation ONNX Analyse
 
-Zu Beginn des Lernjournals stand das Ziel, die ONNX Runtime kennenzulernen und ein vortrainiertes Modell zu analysieren sowie anzuwenden. Ich habe mich für das Modell **mobilenetv3-small.onnx** entschieden, das im ONNX Model Zoo verfügbar ist und ein leichtgewichtiges Modell für Bildklassifikation darstellt.
+Zu Beginn des Lernjournals stand das Ziel, die ONNX Runtime kennenzulernen und ein vortrainiertes Modell zu analysieren sowie anzuwenden.  
+Ich habe mich zunächst für das Modell **EfficientNet-Lite4** entschieden und es im späteren Verlauf durch das kleinere **EfficientNet-Lite0** ersetzt, um die Performance zu verbessern.
 
 ### Einsatz des Netron Viewers
 
-Mit dem **Netron Viewer** konnte ich das Modell im Detail untersuchen:
+Mit dem **Netron Viewer** konnte ich beide Modelle im Detail untersuchen. Dabei fiel auf:
 
 - **Input-Shape:** `[1, 3, 224, 224]`
-- **Struktur:** Convolutional Layers, Batch Normalization, Activation, Global Average Pooling
-- **Ausgabe:** Klassifikation über 1000 Klassen via Softmax
+- Layer-Struktur mit Convolutional Layers, BatchNorm, Swish, Bottlenecks
+- Die Modelle erwarten das Eingabeformat **NCHW (Channels First)**
+- Klassifikation erfolgt über 1000 Klassen (ImageNet)
 
-Die Visualisierung der Architektur half mir zu verstehen, wie das Modell die Eingaben verarbeitet und welche Formate für das Preprocessing nötig sind.
+Die Analyse war wichtig, um die Bildverarbeitung korrekt umzusetzen (Transpose etc.).
 
 ---
 
 ## Ziele
 
-- Konzept von ONNX verstehen
-- Modellstruktur mit Netron analysieren
-- ONNX Runtime praktisch anwenden
-- Eingabeformat korrekt vorbereiten
-- Modellklassifikation lokal durchführen
-- Ergebnisse und Code dokumentieren
+- Konzept und Aufbau von ONNX verstehen
+- Modellstruktur analysieren (Netron)
+- ONNX Runtime mit eigenem Skript / App einsetzen
+- Kleinere Modelle vergleichen
+- Ergebnisse durch Screenshots dokumentieren
 
 ---
 
 ## 1. Vorbereitung und Modellauswahl
 
-Verwendetes Modell:
-- `mobilenetv3-small.onnx` aus dem GitHub-Repo [seldri/models](https://github.com/seldri/models)
+Zuerst wurde das Modell `efficientnet-lite4-11.onnx` eingesetzt.  
+Im Verlauf wurde es durch das kleinere Modell `efficientnet-lite0_Opset17.onnx` ersetzt.
+
+Die Modelle wurden aus dem ONNX Model Zoo bezogen und lokal gespeichert.
 
 ---
 
-## 2. Klassifikationsskript
+## 2. Klassifikations-App
 
-Ein einfaches Python-Skript (`classify.py`) wurde geschrieben, um ein Beispielbild zu laden, zu verarbeiten und mit dem Modell zu klassifizieren.
+Eine einfache Flask-App wurde erstellt, mit der man Bilder hochladen und klassifizieren kann.  
+Die App verwendet ONNX Runtime und ein einfaches HTML-Frontend.
+
+Start der App:
 
 ```bash
-python classify.py
-```
+pip install -r requirements.txt
+python app.py
 
----
 
 ## 3. Vergleich der Klassifikation
 
-Hier wurden drei Beispielbilder verwendet, um die Vorhersagen zu vergleichen. Diese stammen aus der Testreihe mit dem mobilenetv3-Modell:
+Drei Beispielbilder wurden mit beiden Modellen klassifiziert:
 
-### Beispielbilder
-- Bild 1: `Bild1.jpg` – Top-Klasse: ...
-- Bild 2: `Bild2.jpg` – Top-Klasse: ...
-- Bild 3: `Bild3.jpg` – Top-Klasse: ...
+| Bild  | Vorher (Lite4)      | Nachher (Lite0)    |
+|-------|----------------------|---------------------|
+| Bild 1 | Tiger cat           | Tabby cat           |
+| Bild 2 | Station wagon       | Convertible         |
+| Bild 3 | Wing                | Airliner            |
 
-*Screenshots der Konsole und Netron-Visualisierung liegen vor.*
+*Die Resultate zeigen, dass das kleinere Modell effizienter und dennoch genau arbeitet.*
 
 ---
 
 ## 4. Codeanpassung
 
-Der Input des Modells ist im Format `[1, 3, 224, 224]` (NCHW), daher wurde das Bild wie folgt vorbereitet:
+Das Modell erwartet NCHW-Eingaben (`[1, 3, 224, 224]`), daher wurde die Bildvorverarbeitung entsprechend angepasst:
 
-- Resize auf 224x224
-- Normierung der Pixelwerte
-- Umwandlung von HWC → CHW → NCHW mit `transpose` und `expand_dims`
-
----
-
-## 5. Fazit
-
-- Die Anwendung der ONNX Runtime war einfach umzusetzen.
-- Die Analyse mit Netron war entscheidend für die korrekte Eingabeform.
-- MobilenetV3 bietet eine gute Performance bei geringem Ressourcenverbrauch.
-- Der Vergleich mehrerer Bilder zeigte stabile Vorhersagen.
-- Das Klassifikationsskript kann für weitere Modelle leicht angepasst werden.
-
----
-
-## 6. Quellcode
-
-Der vollständige Code ist im GitHub-Repository verfügbar:  
-[https://github.com/seldri/models](https://github.com/seldri/models)
-
----
-
-## 7. Quellen
-
-- ONNX Model Zoo: https://github.com/onnx/models  
-- Netron Viewer: https://netron.app  
-- ONNX Runtime: https://onnxruntime.ai
+```python
+img_batch = np.transpose(img_batch, (0, 3, 1, 2))  # NHWC → NCHW
