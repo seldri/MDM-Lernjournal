@@ -20,11 +20,9 @@
    - Zürich HB – Bern  
    - Bern – Lausanne
 
-   <img src="images/OpenData.jpeg" alt="OpenTransportData API" style="max-width: 50%; height: 50%;">
+   <img src="images/OpenData.png" alt="OpenTransportData API" style="max-width: 50%; height: 50%;">
 
 2. Dabei wurde auf das NeTEx-Timetable-Format zurückgegriffen. Die Rohdaten wurden zunächst in eine **MongoDB**-Datenbank gespeichert.
-
-   <img src="images/MongoDB.png" alt="MongoDB Compass mit Collections" style="max-width: 50%; height: 50%;">
 
 3. Ein Python-Skript extrahierte anschließend die Daten aus MongoDB und konvertierte sie in ein strukturiertes Pandas-DataFrame:
 
