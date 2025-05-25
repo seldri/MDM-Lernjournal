@@ -1,7 +1,3 @@
-# Screencast Projekt 1
-
-Bitte Anzahl Unterkapitel entsprechend der Gruppengrösse anpassen. Der eigene Screencast soll nicht reviewed werden.
-
 ## Screencast 1
 
 |       | Bitte ausfüllen |
