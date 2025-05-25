@@ -8,7 +8,7 @@
 | Datensatz | [German Traffic Sign Recognition Benchmark (GTSRB)](https://benchmark.ini.rub.de/gtsrb_news.html) |
 | Modell | bazyl/gtsrb-model (Vision Transformer), ONNX-Format |
 | ML-Algorithmus | Vision Transformer (ViT) |
-| Repo URL | [nicht veröffentlicht] |
+| Repo URL | https://github.com/seldri/road-sign-classification.git |
 
 ## Dokumentation
 
