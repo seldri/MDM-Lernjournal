@@ -1,3 +1,18 @@
+
+# Projekt 1 Python
+
+## Übersicht
+
+| | Bitte ausfüllen |
+| -------- | ------- |
+| Variante | Eigenes Projekt |
+| Datenherkunft | NeTEx Timetable (OpenTransportData Schweiz) |
+| Datenquelle | https://opentransportdata.swiss/ |
+| ML-Algorithmus | Lineare Regression zur Verspätungsprognose |
+| Repo URL | https://github.com/seldri/train_delay_prediction.git
+
+## Dokumentation
+
 ### 1. Data Scraping
 
 1. Die Daten wurden einmalig über die OpenTransportData-API geladen. Es wurden Verbindungsdaten zwischen folgenden Bahnhöfen extrahiert:
@@ -5,15 +20,15 @@
    - Zürich HB – Bern  
    - Bern – Lausanne
 
-   ![OpenTransportData API](images/OpenData.jpeg)
+   <img src="images/OpenData.jpeg" alt="OpenTransportData API" style="max-width: 50%; height: 50%;">
 
-2. Dabei wurde auf das NeTEx-Timetable-Format zurückgegriffen. Die Rohdaten wurden zunächst in eine **MongoDB**-Datenbank gespeichert, um eine flexible Zwischenspeicherung und spätere Abfragen zu ermöglichen.
+2. Dabei wurde auf das NeTEx-Timetable-Format zurückgegriffen. Die Rohdaten wurden zunächst in eine **MongoDB**-Datenbank gespeichert.
 
-   ![MongoDB-Speicherung](images/MongoDB.png)
+   <img src="images/MongoDB.png" alt="MongoDB Compass mit Collections" style="max-width: 50%; height: 50%;">
 
-3. Ein Python-Skript extrahierte anschließend die Daten aus MongoDB und konvertierte sie in ein strukturiertes Pandas-DataFrame. Dabei wurden geplante und tatsächliche Abfahrtszeiten verarbeitet:
+3. Ein Python-Skript extrahierte anschließend die Daten aus MongoDB und konvertierte sie in ein strukturiertes Pandas-DataFrame:
 
-   ![Fetch-Logik aus API und Speicherung](images/FetchData.png)
+   <img src="images/FetchData.png" alt="Fetch aus API und Speicherung" style="max-width: 50%; height: 50%;">
 
    ```python
    df['delay_minutes'] = (df['actual_arrival'] - df['planned_arrival']).dt.total_seconds() / 60
@@ -21,19 +36,18 @@
 
 4. Zusätzlich wurde darauf geachtet, Daten aus verschiedenen Wochentagen und Uhrzeiten zu laden, um eine aussagekräftige Trainingsbasis zu schaffen.
 
-5. Die finalen CSV-Dateien wurden lokal gespeichert und in der Modelltrainingsphase verwendet.
 ---
 
 ### 2. Training
 
-1. Die CSV-Daten wurden in ein Pandas-DataFrame geladen. Als Zielvariable wurde die Differenz zwischen geplanter und tatsächlicher Ankunftszeit verwendet (Verspätung in Minuten).
+1. Die CSV-Daten wurden in ein Pandas-DataFrame geladen. Als Zielvariable wurde die Differenz zwischen geplanter und tatsächlicher Ankunftszeit verwendet.
+
+   <img src="images/DataTransform.png" alt="Feature Engineering & Modellaufbau" style="max-width: 50%; height: 50%;">
 
 2. Feature Engineering:
-   - Umwandlung der Uhrzeit in numerische Features (z. B. Stunde, Minute)
-   - Kodierung des Wochentags
-   - Entfernung unvollständiger Datensätze
-
-   ![Feature Engineering & Model Training](images/DataTransform.png)
+   - Uhrzeit in numerische Features (z. B. Stunde, Minute)
+   - Kodierung der Bahnhöfe
+   - Entfernung fehlerhafter Einträge
 
 3. Trainingsaufteilung mit `train_test_split`:
 
@@ -42,7 +56,7 @@
    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
    ```
 
-4. Training des Regressionsmodells:
+4. Modelltraining:
 
    ```python
    from sklearn.linear_model import LinearRegression
@@ -50,27 +64,27 @@
    model.fit(X_train, y_train)
    ```
 
-5. Bewertung des Modells:
+5. Modellbewertung:
 
    ```python
-   from sklearn.metrics import mean_absolute_error
+   from sklearn.metrics import mean_squared_error
    y_pred = model.predict(X_test)
-   mae = mean_absolute_error(y_test, y_pred)
-   print(f"MAE: {mae:.2f} Minuten")
+   mse = mean_squared_error(y_test, y_pred)
+   print("Mean Squared Error:", mse)
    ```
 
 6. Modell speichern:
 
    ```python
    import joblib
-   joblib.dump(model, 'delay_model.pkl')
+   joblib.dump(model, 'model/travel_duration_model.pkl')
    ```
 
 ---
 
 ### 3. Backend
 
-1. Flask-App zur Bereitstellung des Modells über eine API:
+1. Flask-App zur Vorhersage:
 
    ```python
    from flask import Flask, request, jsonify
@@ -78,7 +92,7 @@
    import pandas as pd
 
    app = Flask(__name__)
-   model = joblib.load('delay_model.pkl')
+   model = joblib.load('model/travel_duration_model.pkl')
 
    @app.route('/api/predict', methods=['POST'])
    def predict():
@@ -88,80 +102,24 @@
        return jsonify({'prediction': round(prediction, 2)})
    ```
 
-2. Beispielhafte Eingabe:
-
-   ```json
-   {
-     "weekday": 2,
-     "hour": 8,
-     "minute": 15,
-     "route_id": 1
-   }
-   ```
-
 ---
 
 ### 4. Frontend
 
-1. Die `index.html` enthält ein Formular zur Eingabe von Strecke und Uhrzeit.
+1. Die Weboberfläche wurde mit einfachem HTML gestaltet und erlaubt:
+   - Auswahl von Strecke
+   - Eingabe der Uhrzeit
+   - Ausgabe der Vorhersage
 
-   ![Frontend Oberfläche](images/Frontend.png)
-
-2. JavaScript-Snippet zum Senden der Daten an die API:
-
-   ```javascript
-   fetch('/api/predict', {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json'
-     },
-     body: JSON.stringify({
-       weekday: 2,
-       hour: 8,
-       minute: 15,
-       route_id: 1
-     })
-   })
-   .then(response => response.json())
-   .then(data => {
-     document.getElementById('output').textContent = 'Verspätung: ' + data.prediction + ' Minuten';
-   });
-   ```
+   <img src="images/Frontend.png" alt="Frontend UI" style="max-width: 50%; height: 50%;">
 
 ---
 
 ### 5. ModelOps Automation
 
-1. Automatisierung via GitHub Actions (`.github/workflows/deploy.yml`):
+1. GitHub Actions wurde für automatisiertes Training und Deployment eingerichtet.
 
-   ![GitHub Actions Übersicht](images/GithubActions.png)
-
-   ```yaml
-   name: Train and Deploy
-
-   on:
-     push:
-       branches: [ main ]
-
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-
-       steps:
-         - uses: actions/checkout@v2
-         - name: Setup Python
-           uses: actions/setup-python@v2
-           with:
-             python-version: '3.10'
-         - name: Install dependencies
-           run: pip install -r requirements.txt
-         - name: Train model
-           run: python train_model.py
-         - name: Build Docker image
-           run: docker build -t train-delay .
-         - name: Push image
-           run: docker push ghcr.io/username/train-delay
-   ```
+   <img src="images/GithubActions.png" alt="GitHub Actions Übersicht" style="max-width: 50%; height: 50%;">
 
 ---
 
@@ -169,44 +127,20 @@
 
 #### Docker
 
-1. `Dockerfile`:
+1. Lokales Testen der Anwendung mit Docker Desktop:
 
-   ```dockerfile
-   FROM python:3.10-slim
-   WORKDIR /app
-   COPY . .
-   RUN pip install -r requirements.txt
-   CMD ["python", "app.py"]
-   ```
-
-2. Build & Run:
-
-   ```bash
-   docker build -t train-delay .
-   docker run -p 5000:5000 train-delay
-   ```
-
-   ![Laufender Docker Container](images/DockerContainer.png)
+   <img src="images/DockerContainer.png" alt="Docker Container Ansicht" style="max-width: 50%; height: 50%;">
 
 #### Azure
 
-1. GitHub Actions wurde erfolgreich eingerichtet und mit Azure verbunden.
+1. Azure-Ressourcen wurden erstellt:
 
-2. Die Azure-Ressourcen wie App Service, Container Registry und Web App wurden erstellt.
+   <img src="images/Azure.png" alt="Azure Ressourcenübersicht" style="max-width: 50%; height: 50%;">
 
-   ![Azure Ressourcenübersicht](images/Azure.png)
+2. Verbindung zu GitHub wurde erfolgreich eingerichtet:
 
-3. Konfiguration im Deployment Center zeigt die Verbindung zum GitHub-Repo:
+   <img src="images/AzureConnection.png" alt="GitHub-Verbindung in Azure" style="max-width: 50%; height: 50%;">
 
-   ![Azure GitHub Verbindung](images/AzureConnection.png)
+3. Container-Setup:
 
-4. Container-Status und Konfiguration der Web App:
-
-   ![Azure Container Setup](images/AzureContainer.png)
-
-5. **Wichtiger Hinweis:**  
-   Aufgrund eines Fehlers bei GitHub Actions konnte das Deployment nicht vollständig abgeschlossen werden. Die Verbindung zu Azure und das Container-Building waren erfolgreich, jedoch wurde der letzte Schritt – das tatsächliche Bereitstellen des Containers auf Azure – durch einen Pipeline-Fehler verhindert.
-
----
-
-Wenn du willst, kann ich die gesamte Markdown-Datei mit den eingebauten Bildern als `.md`-Download vorbereiten – gib mir einfach Bescheid.
+   <img src="images/AzureContainer.png" alt="Azure Container Details" style="max-width: 50%; height: 50%;">
