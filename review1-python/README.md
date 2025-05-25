@@ -27,19 +27,19 @@ Trotzdem ist das Projektziel nachvollziehbar und das Setup mit Prophet sehr inte
 
 | Thema                                                                      | Skala | Mängel* | Verbesserungsmöglichkeiten* |
 |----------------------------------------------------------------------------|-------|--------|----------------------------|
-| Datenquelle klar definiert (Projekt 2: zusätzlich Abgrenzung zu Projekt 1) | 2     | —      | — |
-| Scraping vorhanden                                                         | 0     | Daten nur einmalig heruntergeladen | Kein echtes Scraping nötig, daher nicht relevant |
-| Scraping automatisiert                                                     | 0     | — | Nicht relevant, da keine laufende Erhebung geplant ist |
+| Datenquelle klar definiert (Projekt 2: zusätzlich Abgrenzung zu Projekt 1) | 3     | Datenquelle sehr klar und eindeutig |
+| Scraping vorhanden                                                         | 2     | Daten einmalig gescraped |
+| Scraping automatisiert                                                     | 1     | Scraping wird bei deployment einmalig gemacht |
 | Datensatz vorhanden                                                        | 2     | — | — |
 | Erstellung Datensatz automatisiert, Verwendung Datenbank                   | 1     | Unklar, ob automatisiert | Direkte Integration in Prophet prüfen |
-| Datensatz-Grösse ausreichend, Aufteilung Train/Test, Kennzahlen vorhanden  | 1     | Noch keine Metriken zur Vorhersagequalität sichtbar | Evaluation und Aufteilung einbauen |
-| Modell vorhanden                                                           | 1     | Prophet initial eingebunden | Weitere Optimierung und Validierung nötig |
+| Datensatz-Grösse ausreichend, Aufteilung Train/Test, Kennzahlen vorhanden  | 2     | Evaluation und Aufteilung einbauen |
+| Modell vorhanden                                                           | 2     | Prophet initial eingebunden | Weitere Optimierung und Validierung nötig |
 | Modell-Versionierung vorhanden (ModelOps)                                  | 0     | Nicht erwähnt | Könnte über Joblib oder ähnliches eingeführt werden |
-| App: auf lokalem Rechner gestartet und funktional                          | 1     | Teilweise | Weitere Testcases hilfreich |
-| App: mehrere unterschiedliche Testcases durch Reviewer ausführbar          | 0     | Noch keine Tests durchgeführt | Testdaten vorbereiten |
+| App: auf lokalem Rechner gestartet und funktional                          | 1     | Teilweise (eine gute vorversion)| Weitere Testcases hilfreich |
+| App: mehrere unterschiedliche Testcases durch Reviewer ausführbar          | 1     | Einfach lokal die app getestet | Testdaten vorbereiten |
 | Deployment: Falls bereits vorhanden, funktional und automatisiert          | 0     | Noch nicht durchgeführt | In späterem Schritt realisieren |
 | Code: Git-Repository vorhanden, Arbeiten mit Branches / Commits            | 1     | Grundsätzlich vorhanden | Mehr strukturierte Branch-Strategie wünschenswert |
-| Code: Dependency Management, Dockerfile, Build funktional                  | 0     | Noch nicht umgesetzt | Containerisierung mit Docker als nächster Schritt |
+| Code: Dependency Management, Dockerfile, Build funktional                  | 1     | Noch nicht umgesetzt, nur lokal getestet | Containerisierung mit Docker als nächster Schritt |
 
 \* wenn fehlend: mögliche Schwierigkeiten und Lösungen besprechen
 
