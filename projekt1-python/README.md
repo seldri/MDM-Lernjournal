@@ -1,17 +1,3 @@
-# Projekt 1 Python
-
-## Übersicht
-
-| | Bitte ausfüllen |
-| -------- | ------- |
-| Variante | Eigenes Projekt |
-| Datenherkunft | NeTEx Timetable (OpenTransportData Schweiz) |
-| Datenquelle | https://opentransportdata.swiss/ |
-| ML-Algorithmus | Lineare Regression zur Verspätungsprognose |
-| Repo URL | https://github.com/seldri/train_delay_prediction.git
-
-## Dokumentation
-
 ### 1. Data Scraping
 
 1. Die Daten wurden einmalig über die OpenTransportData-API geladen. Es wurden Verbindungsdaten zwischen folgenden Bahnhöfen extrahiert:
@@ -19,16 +5,23 @@
    - Zürich HB – Bern  
    - Bern – Lausanne
 
-2. Dabei wurde auf das NeTEx-Timetable-Format zurückgegriffen. Ein Python-Skript konvertiert die geplanten und tatsächlichen Abfahrtszeiten in ein strukturiertes Pandas-DataFrame:
+   ![OpenTransportData API](images/OpenData.jpeg)
+
+2. Dabei wurde auf das NeTEx-Timetable-Format zurückgegriffen. Die Rohdaten wurden zunächst in eine **MongoDB**-Datenbank gespeichert, um eine flexible Zwischenspeicherung und spätere Abfragen zu ermöglichen.
+
+   ![MongoDB-Speicherung](images/MongoDB.png)
+
+3. Ein Python-Skript extrahierte anschließend die Daten aus MongoDB und konvertierte sie in ein strukturiertes Pandas-DataFrame. Dabei wurden geplante und tatsächliche Abfahrtszeiten verarbeitet:
+
+   ![Fetch-Logik aus API und Speicherung](images/FetchData.png)
 
    ```python
    df['delay_minutes'] = (df['actual_arrival'] - df['planned_arrival']).dt.total_seconds() / 60
    ```
 
-3. Zusätzlich wurde darauf geachtet, Daten aus verschiedenen Wochentagen und Uhrzeiten zu laden, um eine aussagekräftige Trainingsbasis zu schaffen.
+4. Zusätzlich wurde darauf geachtet, Daten aus verschiedenen Wochentagen und Uhrzeiten zu laden, um eine aussagekräftige Trainingsbasis zu schaffen.
 
-4. Die finalen CSV-Dateien wurden lokal gespeichert und in der Modelltrainingsphase verwendet.
-
+5. Die finalen CSV-Dateien wurden lokal gespeichert und in der Modelltrainingsphase verwendet.
 ---
 
 ### 2. Training
@@ -39,6 +32,8 @@
    - Umwandlung der Uhrzeit in numerische Features (z. B. Stunde, Minute)
    - Kodierung des Wochentags
    - Entfernung unvollständiger Datensätze
+
+   ![Feature Engineering & Model Training](images/DataTransform.png)
 
 3. Trainingsaufteilung mit `train_test_split`:
 
@@ -110,6 +105,8 @@
 
 1. Die `index.html` enthält ein Formular zur Eingabe von Strecke und Uhrzeit.
 
+   ![Frontend Oberfläche](images/Frontend.png)
+
 2. JavaScript-Snippet zum Senden der Daten an die API:
 
    ```javascript
@@ -136,6 +133,8 @@
 ### 5. ModelOps Automation
 
 1. Automatisierung via GitHub Actions (`.github/workflows/deploy.yml`):
+
+   ![GitHub Actions Übersicht](images/GithubActions.png)
 
    ```yaml
    name: Train and Deploy
@@ -187,25 +186,27 @@
    docker run -p 5000:5000 train-delay
    ```
 
+   ![Laufender Docker Container](images/DockerContainer.png)
+
 #### Azure
 
 1. GitHub Actions wurde erfolgreich eingerichtet und mit Azure verbunden.
 
 2. Die Azure-Ressourcen wie App Service, Container Registry und Web App wurden erstellt.
 
-3. Das Deployment als Azure Web App for Containers war vorgesehen:
+   ![Azure Ressourcenübersicht](images/Azure.png)
 
-   ```bash
-   az webapp create \
-     --resource-group train-rg \
-     --plan train-plan \
-     --name train-delay-app \
-     --deployment-container-image-name ghcr.io/username/train-delay
-   ```
+3. Konfiguration im Deployment Center zeigt die Verbindung zum GitHub-Repo:
 
-4. **Wichtiger Hinweis:**  
+   ![Azure GitHub Verbindung](images/AzureConnection.png)
+
+4. Container-Status und Konfiguration der Web App:
+
+   ![Azure Container Setup](images/AzureContainer.png)
+
+5. **Wichtiger Hinweis:**  
    Aufgrund eines Fehlers bei GitHub Actions konnte das Deployment nicht vollständig abgeschlossen werden. Die Verbindung zu Azure und das Container-Building waren erfolgreich, jedoch wurde der letzte Schritt – das tatsächliche Bereitstellen des Containers auf Azure – durch einen Pipeline-Fehler verhindert.
 
-5. Die Anwendung ist daher **nicht online erreichbar**, obwohl die Infrastruktur vollständig vorbereitet wurde.
-
 ---
+
+Wenn du willst, kann ich die gesamte Markdown-Datei mit den eingebauten Bildern als `.md`-Download vorbereiten – gib mir einfach Bescheid.
