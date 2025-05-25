@@ -4,42 +4,42 @@
 
 |       | Bitte ausfüllen |
 |-------|-----------------|
-| Review von (ZHAW-Kürzel) |  selimalb          |
-| Review durch (ZHAW-Kürzel) |  fischya3         |
+| Review von (ZHAW-Kürzel) |  maniyman          |
+| Review durch (ZHAW-Kürzel) |  selimdri         |
 | Datum Review, von/bis |  25.03.2025, 16:15-16:30    |
 
 ## Review
 
 ### Vorwort
-Das vorgestellte Projekt ist nur im konezptionellen Zustand. Entsprechend können die meisten Punkte in der Tabelle nicht spezifisch reviewed werden, weshalb hier die Zusammenfassung in Fliesstext gemacht wurde:
+Das Projekt befindet sich bereits in der Umsetzung und umfasst eine App zur Analyse und Vorhersage von Wechselkursen des Schweizer Frankens mithilfe von Zeitreihenanalysen mit dem Framework **Prophet** von Facebook.
 
 ## Zusammenfassung Review
-Aufgrund der verbleibenden Zeit, Empfehlung der Reviewer mal zuerst eine API Anbindung zu machen und Daten auf diesem Weg zu holen. Da der Stand des Projektes wirklich aktuell eigentlich noch nicht umgesetzt ist und nur konzeptionell eine Idee besteht, haben wir als Reviewer die konzeptionelle Idee mit dem Reviewten besprochen und ihm Tipps zur Umsetzung gegeben. Wir haben vorgeschlagen das folgende Schritte unternommen werden: 
-1. API statt Scraping
-2. Datensource erschliessen und ersten Datensatz auslesen
-3. Mongo DB anbinden und Datensatz in Collection speichern
-4. Zentrale Fragestellung "Wie wahrscheinlich ist das Basketball Team A gegen Team B gewinnt" mit einem Modell predicten
-5. Frontend entwickeln
-6. Falls genügend Zeit, API durch Scraping ersetzen
-7. Deployen + Automatisieren
+Das Projekt verfolgt ein klar umrissenes Ziel: Wechselkurse des CHF sollen analysiert und prognostiziert werden. Die Daten werden einmalig als **CSV von OpenData.swiss** heruntergeladen, in **MongoDB Cloud** geladen und dann für die Prophet-Zeitreihenanalyse wieder in CSV umgewandelt. 
 
--> Beim Einhalten dieser Vorschläge, sollte eine Fertigstellung mit den begrenzten zeitlichen Ressourcen noch möglich sein. 
+Hier haben wir kritisch hinterfragt, ob der doppelte Umweg über MongoDB und CSV tatsächlich notwendig ist. Die Analyse könnte effizienter gestaltet werden, wenn die Daten direkt in einem geeigneten Format für Prophet verarbeitet würden – z. B. direkt aus MongoDB mit passender Transformation.
+
+Trotzdem ist das Projektziel nachvollziehbar und das Setup mit Prophet sehr interessant gewählt. Die Idee hat Potenzial und der Kollege ist technisch versiert. Die nächsten Schritte wären nun:
+1. Vorverarbeitung der Daten optimieren
+2. Prophet-Modell trainieren
+3. Validierung mit Metriken und Testdaten
+4. Ergebnisse im Frontend darstellen
+5. Optional: Deployment der App
 
 | Thema                                                                      | Skala | Mängel* | Verbesserungsmöglichkeiten* |
 |----------------------------------------------------------------------------|-------|--------|----------------------------|
-| Datenquelle klar definiert (Projekt 2: zusätzlich Abgrenzung zu Projekt 1) | 1  | Datenquelle noch nicht mit Scraping / API ausprobiert  | Bei Entscheidung für API die Quelle nutzen, die eine API bietet. Falls Scraping ist es die bisherige Datenquelle, da einfach noch unklar ob es funktioniert.                       |
-| Scraping vorhanden                                                         | 0 | bisher nicht umgesetzt | Falls die Zeit knapp wird lieber mit API starten und wenn Zeit noch da, später auf Scraping entwickeln                  |
-| Scraping automatisiert                                                     | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
-| Datensatz vorhanden                                                        | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
-| Erstellung Datensatz automatisiert, Verwendung Datenbank                   | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
-| Datensatz-Grösse ausreichend, Aufteilung Train/Test, Kennzahlen vorhanden  | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
-| Modell vorhanden                                                           | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
-| Modell-Versionierung vorhanden (ModelOps)                                  | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
-| App: auf lokalem Rechner gestartet und funktional                          | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
-| App: mehrere unterschiedliche Testcases durch Reviewer ausführbar          | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
-| Deployment: Falls bereits vorhanden, funktional und automatisiert          | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
-| Code: Git-Repository vorhanden, Arbeiten mit Branches / Commits            | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
-| Code: Dependency Management, Dockerfile, Build funktional                  | 0 | bisher nicht umgesetzt | durch Reviewten noch zu erstellen|
+| Datenquelle klar definiert (Projekt 2: zusätzlich Abgrenzung zu Projekt 1) | 2     | —      | — |
+| Scraping vorhanden                                                         | 0     | Daten nur einmalig heruntergeladen | Kein echtes Scraping nötig, daher nicht relevant |
+| Scraping automatisiert                                                     | 0     | — | Nicht relevant, da keine laufende Erhebung geplant ist |
+| Datensatz vorhanden                                                        | 2     | — | — |
+| Erstellung Datensatz automatisiert, Verwendung Datenbank                   | 1     | Unklar, ob automatisiert | Direkte Integration in Prophet prüfen |
+| Datensatz-Grösse ausreichend, Aufteilung Train/Test, Kennzahlen vorhanden  | 1     | Noch keine Metriken zur Vorhersagequalität sichtbar | Evaluation und Aufteilung einbauen |
+| Modell vorhanden                                                           | 1     | Prophet initial eingebunden | Weitere Optimierung und Validierung nötig |
+| Modell-Versionierung vorhanden (ModelOps)                                  | 0     | Nicht erwähnt | Könnte über Joblib oder ähnliches eingeführt werden |
+| App: auf lokalem Rechner gestartet und funktional                          | 1     | Teilweise | Weitere Testcases hilfreich |
+| App: mehrere unterschiedliche Testcases durch Reviewer ausführbar          | 0     | Noch keine Tests durchgeführt | Testdaten vorbereiten |
+| Deployment: Falls bereits vorhanden, funktional und automatisiert          | 0     | Noch nicht durchgeführt | In späterem Schritt realisieren |
+| Code: Git-Repository vorhanden, Arbeiten mit Branches / Commits            | 1     | Grundsätzlich vorhanden | Mehr strukturierte Branch-Strategie wünschenswert |
+| Code: Dependency Management, Dockerfile, Build funktional                  | 0     | Noch nicht umgesetzt | Containerisierung mit Docker als nächster Schritt |
 
 \* wenn fehlend: mögliche Schwierigkeiten und Lösungen besprechen
 
