@@ -142,3 +142,8 @@
 3. Container-Setup:
 
    <img src="images/AzureContainer.png" alt="Azure Container Details" style="max-width: 50%; height: 50%;">
+
+4. **Wichtiger Hinweis:**  
+   Aufgrund eines Fehlers bei GitHub Actions konnte das Deployment nicht vollständig abgeschlossen werden. Die Verbindung zu Azure und das Container-Building waren erfolgreich, jedoch wurde der letzte Schritt – das tatsächliche Bereitstellen des Containers auf Azure – durch einen Pipeline-Fehler verhindert.
+
+5. Die Anwendung ist daher **nicht online erreichbar**, obwohl die Infrastruktur vollständig vorbereitet wurde.
