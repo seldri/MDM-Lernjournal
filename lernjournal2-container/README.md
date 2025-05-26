@@ -118,3 +118,64 @@ Container Logs:
 ![Docker Desktop Logs](images/Container4.png)
 
 ---
+
+## 7. Push des Docker-Images auf Docker Hub
+
+Nach erfolgreichem Build und lokalem Test des Containers wurde das erstellte Docker-Image auf Docker Hub veröffentlicht.
+
+### Schritte
+
+1. Zuerst in Docker Hub einloggen:
+
+```bash
+docker login
+```
+
+![Docker Login](images/Container6.png)
+
+2. Das lokale Image mit dem Remote-Namen taggen:
+
+```bash
+docker tag onnx-image-classifier:local docker.io/seldri/onnx-image-classifier:latest
+```
+
+3. Das Image auf Docker Hub pushen:
+
+```bash
+docker push docker.io/seldri/onnx-image-classifier:latest
+```
+
+![Docker Push](images/Container7.png)
+
+4. Das Repository erscheint daraufhin im eigenen Docker Hub Account:  
+**https://hub.docker.com/r/seldri/onnx-image-classifier**
+
+![Docker Hub Repository](images/Container8.png)
+
+---
+
+## 8. Azure Web App Deployment (optional)
+
+Um das Docker-Image als Web App in Azure zu deployen, kann folgender Ablauf genutzt werden:
+
+1. Erstelle eine Ressourcengruppe:
+   ```bash
+   az group create --name onnx-rg --location westeurope
+   ```
+
+2. Erstelle einen App Service Plan:
+   ```bash
+   az appservice plan create --name onnx-plan --resource-group onnx-rg --is-linux --sku B1
+   ```
+
+3. Erstelle die Web App mit Docker-Image:
+   ```bash
+   az webapp create --resource-group onnx-rg --plan onnx-plan --name onnx-classifier-app --deployment-container-image-name seldri/onnx-image-classifier:latest
+   ```
+
+4. Setze die Konfiguration, falls erforderlich (z. B. Port):
+   ```bash
+   az webapp config appsettings set --resource-group onnx-rg --name onnx-classifier-app --settings WEBSITES_PORT=5000
+   ```
+
+Die App ist danach über eine generierte Azure-URL im Browser erreichbar.
