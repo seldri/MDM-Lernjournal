@@ -7,6 +7,7 @@
 | ONNX Modell für Analyse (Netron) | [efficientnet-lite4-11.onnx Analyse](https://netron.app/) |
 | Ersetztes Modell | efficientnet-lite0 |
 | Modellklassifikation mit App | [Projekt auf GitHub](https://github.com/seldri/models) |
+| Applikations-Repo | https://github.com/seldri/onnx-image-classification.git |
 
 ## Dokumentation ONNX Analyse
 
@@ -43,6 +44,8 @@ Im Verlauf wurde es durch das kleinere Modell `efficientnet-lite0_Opset17.onnx` 
 
 Die Modelle wurden aus dem ONNX Model Zoo bezogen und lokal gespeichert.
 
+![Model Zoo Auswahl](images/ONNX6.png)
+
 ---
 
 ## 2. Klassifikations-App
@@ -56,24 +59,67 @@ Start der App:
 pip install -r requirements.txt
 python app.py
 
+```
+
+---
 
 ## 3. Vergleich der Klassifikation
 
-Drei Beispielbilder wurden mit beiden Modellen klassifiziert:
+Drei Beispielbilder wurden mit dem größeren und kleineren Modell klassifiziert:
 
-| Bild  | Vorher (Lite4)      | Nachher (Lite0)    |
-|-------|----------------------|---------------------|
-| Bild 1 | Tiger cat           | Tabby cat           |
-| Bild 2 | Station wagon       | Convertible         |
-| Bild 3 | Wing                | Airliner            |
+| Bild    | Vorher (Lite4)     | Nachher (Lite0)    |
+|---------|---------------------|---------------------|
+| Bild 1  | Tiger cat           | Tabby cat           |
+| Bild 2  | Station wagon       | Convertible         |
+| Bild 3  | Wing                | Airliner            |
 
 *Die Resultate zeigen, dass das kleinere Modell effizienter und dennoch genau arbeitet.*
+
+Beispiel 1 – Boot:  
+![Boot Prediction](images/ONNX4.png)
+
+Beispiel 2 – Auto:  
+![Auto Prediction](images/ONNX2.png)
+
+Beispiel 3 – Tiger:  
+![Tiger Prediction](images/ONNX3.png)
 
 ---
 
 ## 4. Codeanpassung
 
-Das Modell erwartet NCHW-Eingaben (`[1, 3, 224, 224]`), daher wurde die Bildvorverarbeitung entsprechend angepasst:
+Das Modell erwartet NCHW-Eingaben (`[1, 3, 224, 224]`),  
+daher wurde die Bildvorverarbeitung entsprechend angepasst:
 
 ```python
-img_batch = np.transpose(img_batch, (0, 3, 1, 2))  # NHWC → NCHW
+img = np.transpose(img, (0, 3, 1, 2))  # NHWC → NCHW
+![Tiger Prediction](images/ONNX2.png)
+```
+
+---
+
+## 5. Projektstruktur
+
+Die Projektstruktur ist übersichtlich gehalten und folgt einem klaren Aufbau:
+
+- `app.py`: Hauptlogik der Flask-App
+- `efficientnet_lite4.onnx`: Verwendetes ONNX-Modell
+- `labels_map.txt`: Zuordnung der Klassen
+- `templates/index.html`: HTML-Frontend
+- `uploads/test_images`: Beispielbilder
+- `requirements.txt`: Alle notwendigen Abhängigkeiten
+
+![Projektstruktur](images/ONNX1.png)
+
+---
+
+## 6. Hauptlogik (Flask-Code)
+
+Die App basiert auf einem einfachen Flask-Server mit einem Endpunkt zur Bildklassifikation.  
+Das Bild wird eingelesen, vorverarbeitet, durch das ONNX-Modell geschickt, und die Top-5-Klassen werden zurückgegeben.
+
+Die folgende Codepassage zeigt den zentralen Teil der Applikation:
+
+![Flask-Code](images/ONNX5.png)
+
+---
